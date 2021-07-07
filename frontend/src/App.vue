@@ -1,33 +1,83 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/add-post">Add Post</router-link>
-    </div>
-    <router-view/>
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
+      <div class="container">
+        <img src="../img/download.svg">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <router-link class="nav-link active" to="/">Home</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/shop">Shop</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/add-post">Add Post</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/about">About</router-link>
+            </li>
+            <li class="nav-item">
+              <i class="fal fa-search"></i>
+            </li>
+            <li class="nav-item">
+              <i class="fal fa-shopping-bag"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <router-view></router-view>
   </div>
+  
 </template>
 
+
+<script>
+export default {
+  data: () => ({
+    drawer: null,
+  }),
+};
+</script>
+
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+
+.navbar {
+  font-size: 16px;
 }
 
-#nav {
-  padding: 30px;
+.navbar-light .navbar-nav .nav-link{
+  padding: 0 20px;
+  color: rgb(0, 0, 0);
+  transition: 0.3s ease;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar i:hover,
+.navbar-light .navbar-nav .nav-link.active,
+navbar i.active {
+  color: coral;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.navbar i{
+  font-size: 1.2rem;
+  padding: 0 7px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s ease;
 }
+
 </style>
