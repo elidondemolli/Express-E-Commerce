@@ -34,7 +34,7 @@ export default {
   width: 100%;
   height: 100vh;
   background-size: cover;
-  background-position: top center;
+  background-position: top 60px center;
   display: flex;
   flex-direction: column;
   justify-content: center;

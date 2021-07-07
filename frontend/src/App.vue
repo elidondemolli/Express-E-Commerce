@@ -12,7 +12,7 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span><i id="bar" class="fas fa-bars"></i></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
@@ -80,6 +80,48 @@ navbar i.active {
   cursor: pointer;
   font-weight: 500;
   transition: 0.3s ease;
+}
+
+/* Mobile Navigation */
+.navbar-light .navbar-toggler {
+  border: none;
+  outline: none;
+}
+
+#bar {
+  font-size: 1.5rem;
+  padding: 7px;
+  cursor: pointer;
+  font-weight: 0.3 ease;
+  color: black;
+}
+
+#bar:hover,
+#bar.active{
+  color: #fff;
+}
+
+@media only screen and (max-width: 991px) {
+  body > div > nav > div > button:hover,
+  body > div > nav > div > button:focus{
+    background-color: coral;
+  }
+
+  body > div > nav > div > button:hover #bar,
+  body > div > nav > div > button:focus #bar {
+    color: #fff;
+  }
+
+  #navbarSupportedContent > ul {
+    margin: 1rem;
+    justify-content: flex-end;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  #navbarSupportedContent > ul > li:nth-child(n) > a {
+    padding: 10px 0;
+  }
 }
 
 </style>
