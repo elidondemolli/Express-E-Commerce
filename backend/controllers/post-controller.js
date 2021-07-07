@@ -21,7 +21,7 @@ const getPostByID = async (req, res) => {
 const createPost = async (req, res) => {
     const post = req.body;
     const imageName = req.file.filename;
-    post.image = imagename;
+    post.image = imageName;
     
     try {
         await Post.create(post);
