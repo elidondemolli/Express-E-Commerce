@@ -58,7 +58,15 @@ const updatePost = async (req, res) => {
 
 const deletePost = async (req, res) => {
     try {
-        return await Post.deleteOne({ _id: req.params.id })
+        const result = await Post.findByIdAndDelete(req.params.id)
+        if(result.image != ''){
+            try {
+                fs.unlinkSync("uploads/"+ result.image);
+            } catch (error) {
+                console.log(error);     
+            }
+        }
+        res.status(200).json({ message: 'Post Deleted Successfully!'});
     } catch (error) {
         res.status(404).json({ message: error })
     }
