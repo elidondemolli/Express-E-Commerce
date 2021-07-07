@@ -1,24 +1,12 @@
 <template>
-  <div class="home">
-    <v-container>
-      <v-row>
-        <v-col sm="4" class="pa-3" v-for="post in posts" :key="post._id">
-          <v-card class="pa-1">
-            <img height="250" :src="`${post.image}`">
-            <v-btn class="ml-4 mt-3" small outlined color="indigo">
-              {{ post.category }}
-            </v-btn>
-            <v-card-title class="headline">
-              {{ post.title }}
-            </v-card-title>
-            <v-card-text class="py-0">
-              <p>{{ post.content.substring(0, 100) + "..." }}</p>  
-            </v-card-text>  
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+<section id="home">
+  <div class="container">
+    <h5>NEW ARRIVALS</h5>
+    <h1><span>BEST PRICE</span> THIS YEAR</h1>
+    <p>SHOOMATIC OFFERS YOUR VERY COMFORTABLE <br>TIME ON WALKING AND EXCERICSES.</p>
+    <button>SHOP NOW</button>  
   </div>
+</section>
 </template>
 
 <script>
@@ -38,3 +26,23 @@ export default {
 
 };
 </script>
+
+<style>
+
+#home{
+  background-image: url("../../img/fashion.jpg");
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: top center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#home span {
+  color: coral;
+}
+
+</style>

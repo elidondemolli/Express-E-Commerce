@@ -1,8 +1,8 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 fixed-top">
       <div class="container">
-        <img src="../img/download.svg">
+        <img height="50px" src="../img/download.png">
         <button
           class="navbar-toggler"
           type="button"
@@ -57,6 +57,8 @@ export default {
 
 .navbar {
   font-size: 16px;
+  top: 0;
+  left: 0;
 }
 
 .navbar-light .navbar-nav .nav-link{
