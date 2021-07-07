@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const fs = require('fs')
 
 const getPosts = async (req, res) => {
     try {
@@ -32,11 +33,35 @@ const createPost = async (req, res) => {
 }
 
 const updatePost = async (req, res) => {
-    res.send('UPDATE POST');
+        let new_image = '';
+        if(req.file) {
+            new_image = req.file.filename;
+            try {
+                fs.unlinkSync("uploads/" + req.body.old_image);
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            new_image = req.body.old_image;
+        }
+
+        const newPost = req.body;
+        newPost.image = new_image;
+
+        try {
+            const updated = await Post.findByIdAndUpdate(req.params.id, newPost);
+            res.status(200).json({ message: 'Post Updated Successfully!'})
+        } catch (error) {
+            res.status(404).json({ message: error.message });
+        }
 }
 
 const deletePost = async (req, res) => {
-    res.send('DELETE POST');
+    try {
+        return await Post.deleteOne({ _id: req.params.id })
+    } catch (error) {
+        res.status(404).json({ message: error })
+    }
 }
 
 module.exports = { getPosts, getPostByID, createPost, updatePost, deletePost }

@@ -20,7 +20,7 @@ let upload = multer({
 router.get('/', getPosts);
 router.get('/:id', getPostByID);
 router.post('/', upload, createPost);
-router.patch('/:id', updatePost);
+router.patch('/:id', upload, updatePost);
 router.delete('/:id', deletePost);
 
 module.exports = router;
