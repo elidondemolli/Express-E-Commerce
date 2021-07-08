@@ -14,6 +14,10 @@ const postSchema = new mongoose.Schema({
         min: 0,
         max: 5
     },
+    price: {
+        type: Number,
+        required: true,
+    },
     created: {
         type: Date,
         default: Date.now
