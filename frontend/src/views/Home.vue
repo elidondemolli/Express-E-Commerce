@@ -77,6 +77,76 @@
         </div>
       </div>
     </section>
+
+    <section id="banner" class="my-5 py-5">
+      <div class="container">
+        <h4>MID SEASON SALE</h4>
+        <h1>AUTUNUM COLLECTION<br>UP TO 20%</h1>
+        <button class="text-uppercase">Shop Now</button>
+      </div>
+    </section>
+
+    <section id="clothes" class="my-5 pb-5">
+      <div class="container text-center mt-5 py-5">
+        <h3>Our Featured</h3>
+        <hr class="mx-auto">
+        <p>Here you can check out our new products with fair price on express</p>
+      </div>
+      <div class="row mx-auto container-fluid">
+        <div class="product text-center col-lg-3 col-md-4 col-12">
+          <img class="img-fluid mb-3" src="../../img/shoe1.jpg" alt="">
+          <div class="star">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h5 class="p-name">Sport Boots</h5>
+          <h4 class="p-price">$92.32</h4>
+          <button class="buy-button">BUY NOW</button>
+        </div>
+        <div class="product text-center col-lg-3 col-md-4 col-12">
+          <img class="img-fluid mb-3" src="../../img/shoe2.jpg" alt="">
+          <div class="star">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h5 class="p-name">Sport Boots</h5>
+          <h4 class="p-price">$92.32</h4>
+          <button class="buy-button">BUY NOW</button>
+        </div>
+        <div class="product text-center col-lg-3 col-md-4 col-12">
+          <img class="img-fluid mb-3" src="../../img/shoe3.gif" alt="">
+          <div class="star">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h5 class="p-name">Sport Boots</h5>
+          <h4 class="p-price">$92.32</h4>
+          <button class="buy-button">BUY NOW</button>
+        </div>
+        <div class="product text-center col-lg-3 col-md-4 col-12">
+          <img class="img-fluid mb-3" src="../../img/shoe4.png" alt="">
+          <div class="star">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h5 class="p-name">Sport Boots</h5>
+          <h4 class="p-price">$92.32</h4>
+          <button class="buy-button">BUY NOW</button>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -162,6 +232,32 @@ hr{
 
 button {
   border: none;
+}
+
+#banner {
+  background-image: url("../../img/banner.jpg");
+  width: 100%;
+  height: 60vh;
+  background-size: cover;
+  background-position: top 79px center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#banner h4{
+  color: #D8D8D8;
+}
+
+#banner h1{
+  color: #fff;
+}
+
+#banner button{
+  background-color: black;
 }
 
 </style>
