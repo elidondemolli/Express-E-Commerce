@@ -1,0 +1,48 @@
+<template>
+  <div class="container">
+    <section id="featured" class="my-5 py-5">
+      <div class="container mt-5 py-5">
+        <h3>Our Featured</h3>
+        <hr>
+        <p>Here you can check out our new products with fair price on express</p>
+      </div>
+      <div class="row mx-auto container">
+        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+          <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
+          <div class="star"> 
+            <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
+          </div>
+          <h5 class="p-name">{{post.title}}</h5>
+          <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
+          <button class="buy-button">BUY NOW</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script>
+import {
+  getPosts,
+  getPostByID,
+  createPost,
+  updatePost,
+  deletePost,
+} from "../api/posts";
+
+export default {
+  name: "Shop",
+  data() {
+    return {
+      posts: [],
+    };
+  },
+  async created() {
+    this.posts = await getPosts();
+  },
+};
+</script>
+
+<style>
+
+</style>
