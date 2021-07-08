@@ -8,7 +8,7 @@
       </div>
       <div class="row mx-auto container">
         <div v-for="post in posts" :key="post._id" class="product text-center col-lg-3 col-md-4 col-6">
-            <router-link :to="{ name: 'product', params: { id: post._id }}">
+            <a href=""><router-link :to="{ name: 'Product', params: { id: post._id }}">
           <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
           <div class="star"> 
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
@@ -16,7 +16,7 @@
           <h5 class="p-name">{{post.title}}</h5>
           <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
           <button class="buy-button">BUY NOW</button>
-            </router-link>
+            </router-link></a>
         </div>
       </div>
     </section>
@@ -53,5 +53,5 @@ export default {
   object-fit: cover;
 }
 
-a { text-decoration: none; }
+a { text-decoration: none !important; color: black !important;  }
 </style>
