@@ -8,6 +8,12 @@ const postSchema = new mongoose.Schema({
         type: String,
         data: Buffer
     },
+    rating: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 5
+    },
     created: {
         type: Date,
         default: Date.now

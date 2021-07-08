@@ -23,56 +23,13 @@
         <p>Here you can check out our new products with fair price on express</p>
       </div>
       <div class="row mx-auto container-fluid">
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-          <img class="img-fluid mb-3" src="../../img/asd.png" alt="">
-          <div class="star">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
+        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+          <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
+          <div class="star"> 
+            <i v-for="post in posts" :key="post.rating" class="fas fa-star"></i>
           </div>
-          <h5 class="p-name">Sport Boots</h5>
-          <h4 class="p-price">$92.32</h4>
-          <button class="buy-button">BUY NOW</button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-          <img class="img-fluid mb-3" src="../../img/black-bag.gif" alt="">
-          <div class="star">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <h5 class="p-name">Sport Boots</h5>
-          <h4 class="p-price">$92.32</h4>
-          <button class="buy-button">BUY NOW</button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-          <img class="img-fluid mb-3" src="../../img/bag.png" alt="">
-          <div class="star">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <h5 class="p-name">Sport Boots</h5>
-          <h4 class="p-price">$92.32</h4>
-          <button class="buy-button">BUY NOW</button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-          <img class="img-fluid mb-3" src="../../img/bag2.gif" alt="">
-          <div class="star">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <h5 class="p-name">Sport Boots</h5>
-          <h4 class="p-price">$92.32</h4>
+          <h5 class="p-name">{{post.title}}</h5>
+          <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
           <button class="buy-button">BUY NOW</button>
         </div>
       </div>
@@ -88,65 +45,118 @@
 
     <section id="clothes" class="my-5 pb-5">
       <div class="container text-center mt-5 py-5">
-        <h3>Our Featured</h3>
+        <h3>Clothes</h3>
         <hr class="mx-auto">
         <p>Here you can check out our new products with fair price on express</p>
       </div>
       <div class="row mx-auto container-fluid">
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-          <img class="img-fluid mb-3" src="../../img/shoe1.jpg" alt="">
-          <div class="star">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
+        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+          <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
+          <div class="star"> 
+            <i v-for="post in posts" :key="post.rating" class="fas fa-star"></i>
           </div>
-          <h5 class="p-name">Sport Boots</h5>
-          <h4 class="p-price">$92.32</h4>
-          <button class="buy-button">BUY NOW</button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-          <img class="img-fluid mb-3" src="../../img/shoe2.jpg" alt="">
-          <div class="star">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <h5 class="p-name">Sport Boots</h5>
-          <h4 class="p-price">$92.32</h4>
-          <button class="buy-button">BUY NOW</button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-          <img class="img-fluid mb-3" src="../../img/shoe3.gif" alt="">
-          <div class="star">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <h5 class="p-name">Sport Boots</h5>
-          <h4 class="p-price">$92.32</h4>
-          <button class="buy-button">BUY NOW</button>
-        </div>
-        <div class="product text-center col-lg-3 col-md-4 col-12">
-          <img class="img-fluid mb-3" src="../../img/shoe4.png" alt="">
-          <div class="star">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <h5 class="p-name">Sport Boots</h5>
-          <h4 class="p-price">$92.32</h4>
+          <h5 class="p-name">{{post.title}}</h5>
+          <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
           <button class="buy-button">BUY NOW</button>
         </div>
       </div>
     </section>
+
+    <section id="watches" class="my-5 pb-5">
+      <div class="container text-center mt-5 py-5">
+        <h3>Best Watches</h3>
+        <hr class="mx-auto">
+        <p>Here you can check out our new products with fair price on express</p>
+      </div>
+      <div class="row mx-auto container-fluid">
+        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+          <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
+          <div class="star"> 
+            <i v-for="post in posts" :key="post.rating" class="fas fa-star"></i>
+          </div>
+          <h5 class="p-name">{{post.title}}</h5>
+          <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
+          <button class="buy-button">BUY NOW</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="shoes" class="my-5 pb-5">
+      <div class="container text-center mt-5 py-5">
+        <h3>Best Shoes</h3>
+        <hr class="mx-auto">
+        <p>Here you can check out our new products with fair price on express</p>
+      </div>
+      <div class="row mx-auto container-fluid">
+        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+          <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
+          <div class="star"> 
+            <i v-for="post in posts" :key="post.rating" class="fas fa-star"></i>
+          </div>
+          <h5 class="p-name">{{post.title}}</h5>
+          <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
+          <button class="buy-button">BUY NOW</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mt-5 py-5">
+      <div class="row container mx-auto pt-5">
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+          <img height="100px" src="../../img/Express-Logo.png" alt="">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel lorem ultrices, venenatis ex vehicula.</p>
+        </div>
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+          <h5 class="pb-2">Featured</h5>
+          <ul class="text-uppercase list-unstyled">
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">Boys</a></li>
+            <li><a href="#">Girls</a></li>
+            <li><a href="#">New Arrivals</a></li>
+            <li><a href="#">Shoes</a></li>
+            <li><a href="#">Clothes</a></li>
+          </ul>
+        </div>
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+          <h5 class="pb-2">Contact Us</h5>
+          <div>
+            <h6 class="text-uppercase">Address</h6>
+            <p>123 Dheu i Bardhe, Gjilan, KOSOVO</p>
+          </div>
+          <div>
+            <h6 class="text-uppercase">Phone</h6>
+            <p>(383) 44-444-444</p>
+          </div>
+           <div>
+            <h6 class="text-uppercase">Email</h6>
+            <p>Express@Exp.com</p>
+          </div>
+        </div>
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+          <h5 class="pb-2">Instagram</h5>
+          <div class="row">
+            <img class="img-fluid w-25 h-100 m-2" src="../../img/shoe2.jpg">
+            <img class="img-fluid w-25 h-100 m-2" src="../../img/shoe2.jpg">
+            <img class="img-fluid w-25 h-100 m-2" src="../../img/shoe2.jpg">
+            <img class="img-fluid w-25 h-100 m-2" src="../../img/shoe2.jpg">
+            <img class="img-fluid w-25 h-100 m-2" src="../../img/shoe2.jpg">
+          </div>
+      </div>
+      </div>
+      <div class="copyright mt-5">
+        <div class="row container mx-auto">
+          <div class="col-lg-4 col-md-6 col-12 text-nowrap">
+            <p>Express @ 2021. All Rights Reserved</p>
+          </div>
+          <div class="col-lg-4 col-md-6 col-12">
+            <a href="#"><i class="fab fa-facebook-square"></i></a>
+            <a href="#"><i class="fab fa-twitter-square"></i></a>
+            <a href="#"><i class="fab fa-instagram-square"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -258,6 +268,29 @@ button {
 
 #banner button{
   background-color: black;
+}
+
+footer {
+  background-color: #222222;
+}
+
+footer h5{
+  color: #D8D8D8;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+footer li{
+  padding-bottom: 4px;
+}
+
+footer li a{
+  font-size: 0.8rem;
+  color: #999;
+}
+
+footer li a:hover{
+  color: #D8D8D8;
 }
 
 </style>
