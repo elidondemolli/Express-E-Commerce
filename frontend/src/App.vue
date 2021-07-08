@@ -39,6 +39,63 @@
       </div>
     </nav>
     <router-view></router-view>
+    <footer class="mt-5 py-5">
+      <div class="row container mx-auto pt-5">
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+          <img height="100px" src="../img/Express-Logo.png" alt="">
+          <p class="pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel lorem ultrices, venenatis ex vehicula. Nam vel lorem ultrices, venenatis ex vehicula. Nam vel lorem ultrices, venenatis ex vehicula.</p>
+        </div>
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+          <h5 class="pb-2">Featured</h5>
+          <ul class="text-uppercase list-unstyled">
+            <li><a href="#">Men</a></li>
+            <li><a href="#">Women</a></li>
+            <li><a href="#">Boys</a></li>
+            <li><a href="#">Girls</a></li>
+            <li><a href="#">New Arrivals</a></li>
+            <li><a href="#">Shoes</a></li>
+            <li><a href="#">Clothes</a></li>
+          </ul>
+        </div>
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+          <h5 class="pb-2">Contact Us</h5>
+          <div>
+            <h6 class="text-uppercase">Address</h6>
+            <p>123 Dheu i Bardhe, Gjilan, KOSOVO</p>
+          </div>
+          <div>
+            <h6 class="text-uppercase">Phone</h6>
+            <p>(383) 44-444-444</p>
+          </div>
+           <div>
+            <h6 class="text-uppercase">Email</h6>
+            <p>Express@Exp.com</p>
+          </div>
+        </div>
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+          <h5 class="pb-2">Instagram</h5>
+          <div class="row">
+            <img class="img-fluid w-25 h-100 m-2" src="../img/shoe2.jpg">
+            <img class="img-fluid w-25 h-100 m-2" src="../img/shoe2.jpg">
+            <img class="img-fluid w-25 h-100 m-2" src="../img/shoe2.jpg">
+            <img class="img-fluid w-25 h-100 m-2" src="../img/shoe2.jpg">
+            <img class="img-fluid w-25 h-100 m-2" src="../img/shoe2.jpg">
+          </div>
+      </div>
+      </div>
+      <div class="copyright mt-5">
+        <div class="row container mx-auto">
+          <div class="col-lg-4 col-md-6 col-12 text-nowrap mb-2">
+            <p>Express @ 2021. All Rights Reserved</p>
+          </div>
+          <div class="col-lg-4 col-md-6 col-12">
+            <a href="#"><i class="fab fa-facebook-square"></i></a>
+            <a href="#"><i class="fab fa-twitter-square"></i></a>
+            <a href="#"><i class="fab fa-instagram-square"></i></a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
   
 </template>
@@ -122,6 +179,52 @@ navbar i.active {
   #navbarSupportedContent > ul > li:nth-child(n) > a {
     padding: 10px 0;
   }
+
+  footer {
+  background-color: #222222;
+}
+
+footer h5 {
+  color: #D8D8D8;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+footer li{
+  padding-bottom: 4px;
+}
+
+footer li a{
+  font-size: 0.8rem;
+  color: #999;
+}
+
+footer li a:hover{
+  color: #D8D8D8;
+}
+
+footer p {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+footer .copyright a{
+  color: #000;
+  width: 38px;
+  height: 38px;
+  background-color: #fff;
+  display: inline-block;
+  text-align: center;
+  line-height: 38px;
+  border-radius: 50%;
+  transition: 0.3 ease;
+  margin: 0 5px;
+}
+
+footer .copyright a:hover{
+  color: #fff;
+  background-color: #fb744f;
+}
 }
 
 </style>
