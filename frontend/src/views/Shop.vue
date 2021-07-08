@@ -7,7 +7,8 @@
         <p>Here you can check out our new products with fair prices on Express</p>
       </div>
       <div class="row mx-auto container">
-        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-6">
+        <div v-for="post in posts" :key="post._id" class="product text-center col-lg-3 col-md-4 col-6">
+            <router-link :to="{ name: 'product', params: { id: post._id }}">
           <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
           <div class="star"> 
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
@@ -15,6 +16,7 @@
           <h5 class="p-name">{{post.title}}</h5>
           <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
           <button class="buy-button">BUY NOW</button>
+            </router-link>
         </div>
       </div>
     </section>
@@ -44,12 +46,12 @@ export default {
 </script>
 
 <style>
-
 .product img {
-    width: 100%;
-    height: auto;
-    box-sizing: border-box;
-    object-fit: cover;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  object-fit: cover;
 }
 
+a { text-decoration: none; }
 </style>
