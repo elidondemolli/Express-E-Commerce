@@ -2,12 +2,12 @@
   <div class="container">
     <section id="featured" class="my-5 py-5">
       <div class="container mt-5 py-5">
-        <h3>Our Featured</h3>
+        <h3>Our Products</h3>
         <hr>
-        <p>Here you can check out our new products with fair price on express</p>
+        <p>Here you can check out our new products with fair prices on Express</p>
       </div>
       <div class="row mx-auto container">
-        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-6">
           <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
           <div class="star"> 
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
@@ -44,5 +44,12 @@ export default {
 </script>
 
 <style>
+
+.product img {
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    object-fit: cover;
+}
 
 </style>
