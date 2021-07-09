@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 fixed-top">
       <div class="container">
-        <img height="50px" src="../img/download.png">
+        <a href="/"><img height="50px" src="../img/download.png"></a>
         <button
           class="navbar-toggler"
           type="button"

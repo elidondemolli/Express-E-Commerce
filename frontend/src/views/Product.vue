@@ -11,7 +11,7 @@
         </div>
         <div class="col-lg-6 col-md-12 col-12">
           <h6>{{ product.category }}</h6>
-          <h3 class="py-4">{{ product.title }}</h3>
+          <h3 class="">{{ product.title }}</h3>
           <h2>${{ product.price }}</h2>
           <select class="my-3">
             <option value="">XXL</option>
@@ -41,7 +41,7 @@
           :key="post.id"
           class="product text-center col-lg-3 col-md-4 col-12"
         >
-        <a href=""><router-link :to="{ name: 'Product', params: { id: post._id }}">
+        <a href="" @click="reloadPage"><router-link :to="{ name: 'Product', params: { id: post._id }}">
           <img class="img-fluid mb-3" :src="`../../${post.image}`" alt="" />
           <div class="star">
             <i
@@ -82,6 +82,11 @@ export default {
     const data = await getPosts();
     this.product = await getPostByID(this.$route.params.id);
     this.posts = data.filter(item => item.category == this.product.category).splice(0, 4);
+  },
+  methods: {
+    reloadPage() {
+      window.location.reload();
+    }
   },
 };
 </script>

@@ -138,7 +138,7 @@ export default {
     this.featured = items.filter(items => items.rating == 5).splice(0, 4);
     this.watches = items.filter(items => items.category == 'Watch').splice(0, 4);
     this.shoe = items.filter(items => items.category == 'Shoe').splice(0, 4);
-    this.clothing = items.filter(items => items.category != 'Shoe' || items.category == 'Watch' || items.category == 'Bag').splice(0, 4);
+    this.clothing = items.filter(items => items.category != 'Shoe' && items.category && 'Watch' && items.category != 'Bag').splice(0, 4);
   },
 };
 </script>
@@ -247,7 +247,7 @@ footer li{
 
 footer li a{
   font-size: 0.8rem;
-  color: #999;
+  color: #999 !important;
 }
 
 footer li a:hover{
