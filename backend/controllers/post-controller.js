@@ -22,6 +22,7 @@ const getPostByID = async (req, res) => {
 const createPost = async (req, res) => {
     const post = req.body;
     console.log(post)
+    console.log(req.file)
     const imageName = req.file.filename;
     post.image = imageName;
     

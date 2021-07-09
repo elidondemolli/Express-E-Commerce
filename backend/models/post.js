@@ -6,7 +6,6 @@ const postSchema = new mongoose.Schema({
     content: String,
     image: {
         type: String,
-        data: Buffer
     },
     rating: {
         type: Number,

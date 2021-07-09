@@ -13,8 +13,10 @@
           <div class="star"> 
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
           </div>
+          <span></span>
           <h5 class="p-name">{{post.title}}</h5>
-          <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
+          <!-- <h4 class="p-content">{{post.content.substring(0, 20) + "..."}}</h4> -->
+          <h4 class="p-price">{{ new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(post.price) }}</h4>
           <button class="buy-button">BUY NOW</button>
             </router-link></a>
         </div>
@@ -51,6 +53,10 @@ export default {
   height: 61.8%;
   box-sizing: border-box;
   object-fit: cover;
+}
+
+.p-price {
+  color: #4e4e4e;
 }
 
 a { text-decoration: none !important; color: black !important;  }

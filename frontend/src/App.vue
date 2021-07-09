@@ -43,7 +43,7 @@
       <div class="row container mx-auto pt-5">
         <div class="footer-one col-lg-3 col-md-6 col-12">
           <img height="100px" src="../img/Express-Logo.png" alt="">
-          <p class="pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel lorem ultrices, venenatis ex vehicula. Nam vel lorem ultrices, venenatis ex vehicula. Nam vel lorem ultrices, venenatis ex vehicula.</p>
+          <p class="pt-3">Welcome to EXPRESS, your number one source for all things. We're dedicated to giving you the very best of our products, with a focus on dependability, customer service and uniqueness.</p>
         </div>
         <div class="footer-one col-lg-3 col-md-6 col-12">
           <h5 class="pb-2">Featured</h5>
@@ -225,6 +225,7 @@ footer .copyright a:hover{
   color: #fff;
   background-color: #fb744f;
 }
+
 }
 
 </style>

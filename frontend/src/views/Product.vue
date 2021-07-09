@@ -8,7 +8,7 @@
         <div class="col-lg-6 col-md-12 col-12">
           <h6>{{ product.category }}</h6>
           <h3 class="">{{ product.title }}</h3>
-          <h2>${{ product.price }}</h2>
+          <h4 class="p-price">{{ new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(product.price) }}</h4>
           <select class="my-3">
             <option value="">XXL</option>
             <option value="">XL</option>
@@ -23,7 +23,7 @@
       </div>
     </section>
 
-    <section id="related" class="my-5 pb-5">
+    <section id="related" class="my-10 pb-5">
       <div class="container text-center mt-5 py-5">
         <h3>Related Items</h3>
         <hr class="mx-auto" />
@@ -47,7 +47,7 @@
             ></i>
           </div>
           <h5 class="p-name">{{ post.title }}</h5>
-          <h4 class="p-price">{{ post.content.substring(0, 20) + "..." }}</h4>
+          <h4 class="p-price">{{ new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(post.price) }}</h4>
           <button class="buy-button">BUY NOW</button>
           </router-link></a>
         </div>
@@ -117,6 +117,10 @@ export default {
 
 .prod-img {
   height: auto !important;
+}
+
+.p-price {
+  color: #4e4e4e;
 }
 
 .buy-btn {

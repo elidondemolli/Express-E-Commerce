@@ -30,7 +30,7 @@
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
           </div>
           <h5 class="p-name">{{post.title}}</h5>
-          <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
+          <h4 class="p-price">{{ new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(post.price) }}</h4>
           <button class="buy-button">BUY NOW</button>
           </router-link></a>
         </div>
@@ -59,7 +59,7 @@
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
           </div>
           <h5 class="p-name">{{post.title}}</h5>
-          <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
+          <h4 class="p-price">{{ new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(post.price) }}</h4>
           <button class="buy-button">BUY NOW</button>
           </router-link></a>
         </div>
@@ -80,7 +80,7 @@
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
           </div>
           <h5 class="p-name">{{post.title}}</h5>
-          <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
+          <h4 class="p-price">{{ new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(post.price) }}</h4>
           <button class="buy-button">BUY NOW</button>
           </router-link></a>
         </div>
@@ -101,7 +101,7 @@
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
           </div>
           <h5 class="p-name">{{post.title}}</h5>
-          <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
+          <h4 class="p-price">{{ new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(post.price) }}</h4>
           <button class="buy-button">BUY NOW</button>
           </router-link></a>
         </div>
@@ -139,7 +139,7 @@ export default {
     // this.featured = items.filter(item => item.rating == 5).splice(0, 4);
     this.watches = items.filter(items => items.category == 'Watch').splice(this.generateRandomInteger(0, 3), 4);
     this.shoe = items.filter(items => items.category == 'Shoe').splice(this.generateRandomInteger(0, 3), 4);
-    this.clothing = items.filter(items => items.category != 'Shoe' && items.category && 'Watch' && items.category != 'Bag').splice(this.generateRandomInteger(0, 3), 4);
+    this.clothing = items.filter(items => items.category != 'Shoe' && items.category != 'Watch' && items.category != 'Bag').splice(this.generateRandomInteger(0, 3), 4);
   },
   methods: {
       generateRandomInteger(min, max) {
@@ -192,6 +192,10 @@ export default {
 .product:hover .buy-button{
   transform: translate(0);
   opacity: 1;
+}
+
+.p-price {
+  color: #4e4e4e;
 }
 
 hr{

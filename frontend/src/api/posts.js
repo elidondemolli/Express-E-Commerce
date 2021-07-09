@@ -13,7 +13,8 @@ export const getPostByID = async (id) => {
 }
 
 export const createPost = async (body) => {
-    const res = await axios.post(`/api/post/${post}`);
+    const res = await axios.post(`/api/post/`, body);
+    console.log('res', res)
     return res.data;
 }
 
