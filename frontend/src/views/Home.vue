@@ -18,7 +18,7 @@
     </section> -->
     <section id="featured" class="my-5 pb-5">
       <div class="container text-center mt-5 py-5">
-        <h3>Our Featured</h3>
+        <h3>Our Featured Products</h3>
         <hr class="mx-auto">
         <p>Here you can check out our new products with fair price on express</p>
       </div>
@@ -135,11 +135,19 @@ export default {
   async created() {
     this.posts = await getPosts();
     const items = await getPosts();
-    this.featured = items.filter(items => items.rating == 5).splice(0, 4);
-    this.watches = items.filter(items => items.category == 'Watch').splice(0, 4);
-    this.shoe = items.filter(items => items.category == 'Shoe').splice(0, 4);
-    this.clothing = items.filter(items => items.category != 'Shoe' && items.category && 'Watch' && items.category != 'Bag').splice(0, 4);
+    this.featured = items.filter(item => item.rating == 5).splice(this.generateRandomInteger(0, 3), 4);
+    // this.featured = items.filter(item => item.rating == 5).splice(0, 4);
+    this.watches = items.filter(items => items.category == 'Watch').splice(this.generateRandomInteger(0, 3), 4);
+    this.shoe = items.filter(items => items.category == 'Shoe').splice(this.generateRandomInteger(0, 3), 4);
+    this.clothing = items.filter(items => items.category != 'Shoe' && items.category && 'Watch' && items.category != 'Bag').splice(this.generateRandomInteger(0, 3), 4);
   },
+  methods: {
+      generateRandomInteger(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+  }
 };
 </script>
 

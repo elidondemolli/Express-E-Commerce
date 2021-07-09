@@ -1,13 +1,9 @@
 <template>
   <div>
-    <section class="container product my-5 pt-5">
+    <section class="container sproduct my-5 pt-5">
       <div class="row mt-5">
         <div class="col-lg-5 col-md-12 col-12">
           <img class="prod-img img-fluid w-100 pb-1" :src="`../../${product.image}`" alt="" />
-
-          <div class="small-img-group">
-            
-          </div>
         </div>
         <div class="col-lg-6 col-md-12 col-12">
           <h6>{{ product.category }}</h6>
@@ -21,13 +17,13 @@
           </select>
           <input type="number" value="1" />
           <button class="buy-btn">Add to Cart</button>
-          <h4 class="mt-5 mb-5">Product Details</h4>
+          <h4 class="mt-5 mb-3">Product Details</h4>
           <span>{{ product.content }}</span>
         </div>
       </div>
     </section>
 
-    <section id="shoes" class="my-5 pb-5">
+    <section id="related" class="my-5 pb-5">
       <div class="container text-center mt-5 py-5">
         <h3>Related Items</h3>
         <hr class="mx-auto" />
@@ -102,12 +98,12 @@ export default {
   cursor: pointer;
 }
 
-.product select {
+.sproduct select {
   display: block;
   padding: 5px 10px;
 }
 
-.product input {
+.sproduct input {
   width: 50px;
   height: 40px;
   padding-left: 10px;
@@ -115,7 +111,7 @@ export default {
   margin-right: 10px;
 }
 
-.product input:focus {
+.sproduct input:focus {
   outline: none;
 }
 
