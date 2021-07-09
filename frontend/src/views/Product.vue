@@ -17,6 +17,7 @@
           </select>
           <input type="number" value="1" />
           <button class="buy-btn">Add to Cart</button>
+          <button class="buy-btn"><router-link :to="{ name: 'Edit-post', params: { id: product._id }}">Edit</router-link></button>
           <h4 class="mt-5 mb-3">Product Details</h4>
           <span>{{ product.content }}</span>
         </div>

@@ -9,6 +9,7 @@ export const getPosts = async () => {
 
 export const getPostByID = async (id) => {
     const res = await axios.get(`/api/post/${id}`);
+    console.log(res.data)
     return res.data;
 }
 
@@ -20,6 +21,7 @@ export const createPost = async (body) => {
 
 export const updatePost = async (id, body) => {
     const res = await axios.patch(`/api/post/${id}`, body);
+    console.log('update', updatePost)
     return res.data;
 }
 

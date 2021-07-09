@@ -1,16 +1,21 @@
 <template>
   <div>
     <section class="wrapper container">
-      <div class="title">Add Product</div>
+      <div class="title">Edit Product</div>
       <form
         method="POST"
         enctype="multipart/form-data"
         class="form"
-        @submit.prevent="submitForm"
+        @submit.prevent="updateForm"
       >
         <div class="input_field">
           <label>Title</label>
-          <input type="text" class="input" name="title" v-model="post.title" />
+          <input
+            type="text"
+            v-model="product.title"
+            class="input"
+            name="title"
+          />
         </div>
         <div class="input_field">
           <label>Content</label>
@@ -18,9 +23,10 @@
             type="text"
             class="input"
             name="content"
-            v-model="post.content"
+            v-model="product.content"
           />
         </div>
+        <img class="img-fluid mb-3" :src="`/${product.image}`" alt="" />
         <div class="input_field">
           <label>Image</label>
           <input
@@ -35,7 +41,7 @@
         <div class="input_field">
           <label>Rating</label>
           <div class="costum_select">
-            <select v-model="post.rating" name="rating" id="">
+            <select v-model="product.rating" name="rating" id="">
               <option value="">Select</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -43,6 +49,7 @@
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
+            
           </div>
         </div>
         <div class="input_field">
@@ -51,15 +58,20 @@
             type="text"
             class="input"
             name="category"
-            v-model="post.category"
+            v-model="product.category"
           />
         </div>
         <div class="input_field">
           <label>Price</label>
-          <input type="text" class="input" name="price" v-model="post.price" />
+          <input
+            type="text"
+            class="input"
+            name="price"
+            v-model="product.price"
+          />
         </div>
         <div class="input_field">
-          <input type="submit" value="Submit" class="btn"/>
+          <input type="submit" value="Submit" class="btn" />
         </div>
       </form>
     </section>
@@ -67,12 +79,12 @@
 </template>
 
 <script>
-import { createPost } from "../api/posts";
+import { updatePost, getPostByID } from "../api/posts";
 export default {
-  name: "Add-post",
+  name: "Edit-post",
   data() {
     return {
-      post: {
+      product: {
         title: "",
         content: "",
         image: "",
@@ -83,19 +95,24 @@ export default {
       image: "",
     };
   },
+  async created() {
+    this.product = await getPostByID(this.$route.params.id);
+  },
   methods: {
     selectFile() {
       this.image = this.$refs.file.files[0];
     },
-    async submitForm() {
+    async updateForm() {
       const formData = new FormData();
       formData.append("image", this.image);
-      formData.append("title", this.post.title);
-      formData.append("content", this.post.content);
-      formData.append("rating", this.post.rating);
-      formData.append("category", this.post.category);
-      formData.append("price", this.post.price);
-      const response = await createPost(formData, {
+      formData.append("title", this.product.title);
+      formData.append("content", this.product.content);
+      formData.append("rating", this.product.rating);
+      formData.append("category", this.product.category);
+      formData.append("price", this.product.price);
+      formData.append("old_image", this.product.image);
+
+      const response = await updatePost(this.$route.params.id, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
