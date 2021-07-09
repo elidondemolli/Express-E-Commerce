@@ -48,7 +48,7 @@ export default {
 <style>
 .product img {
   width: 100%;
-  height: auto;
+  height: 61.8%;
   box-sizing: border-box;
   object-fit: cover;
 }

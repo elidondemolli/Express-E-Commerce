@@ -3,7 +3,7 @@
     <section class="container product my-5 pt-5">
       <div class="row mt-5">
         <div class="col-lg-5 col-md-12 col-12">
-          <img class="img-fluid w-100 pb-1" :src="`../../${product.image}`" alt="" />
+          <img class="prod-img img-fluid w-100 pb-1" :src="`../../${product.image}`" alt="" />
 
           <div class="small-img-group">
             
@@ -41,6 +41,7 @@
           :key="post.id"
           class="product text-center col-lg-3 col-md-4 col-12"
         >
+        <a href=""><router-link :to="{ name: 'Product', params: { id: post._id }}">
           <img class="img-fluid mb-3" :src="`../../${post.image}`" alt="" />
           <div class="star">
             <i
@@ -52,6 +53,7 @@
           <h5 class="p-name">{{ post.title }}</h5>
           <h4 class="p-price">{{ post.content.substring(0, 20) + "..." }}</h4>
           <button class="buy-button">BUY NOW</button>
+          </router-link></a>
         </div>
       </div>
     </section>
@@ -78,8 +80,8 @@ export default {
   },
   async created() {
     const data = await getPosts();
-    this.posts = data.filter(item => item.category == "Jacket").splice(0, 4);
     this.product = await getPostByID(this.$route.params.id);
+    this.posts = data.filter(item => item.category == this.product.category).splice(0, 4);
   },
 };
 </script>
@@ -110,6 +112,10 @@ export default {
 
 .product input:focus {
   outline: none;
+}
+
+.prod-img {
+  height: auto !important;
 }
 
 .buy-btn {

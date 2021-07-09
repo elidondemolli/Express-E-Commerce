@@ -196,7 +196,7 @@ footer li{
 
 footer li a{
   font-size: 0.8rem;
-  color: #999;
+  color: #999 !important;
 }
 
 footer li a:hover{

@@ -23,7 +23,8 @@
         <p>Here you can check out our new products with fair price on express</p>
       </div>
       <div class="row mx-auto container-fluid">
-        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+        <div v-for="post in featured" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+          <a href=""><router-link :to="{ name: 'Product', params: { id: post._id }}">
           <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
           <div class="star"> 
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
@@ -31,6 +32,7 @@
           <h5 class="p-name">{{post.title}}</h5>
           <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
           <button class="buy-button">BUY NOW</button>
+          </router-link></a>
         </div>
       </div>
     </section>
@@ -50,7 +52,8 @@
         <p>Here you can check out our new products with fair price on express</p>
       </div>
       <div class="row mx-auto container-fluid">
-        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+        <div v-for="post in clothing" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+          <a href=""><router-link :to="{ name: 'Product', params: { id: post._id }}">
           <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
           <div class="star"> 
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
@@ -58,6 +61,7 @@
           <h5 class="p-name">{{post.title}}</h5>
           <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
           <button class="buy-button">BUY NOW</button>
+          </router-link></a>
         </div>
       </div>
     </section>
@@ -69,7 +73,8 @@
         <p>Here you can check out our new products with fair price on express</p>
       </div>
       <div class="row mx-auto container-fluid">
-        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+        <div v-for="post in watches" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+          <a href=""><router-link :to="{ name: 'Product', params: { id: post._id }}">
           <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
           <div class="star"> 
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
@@ -77,6 +82,7 @@
           <h5 class="p-name">{{post.title}}</h5>
           <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
           <button class="buy-button">BUY NOW</button>
+          </router-link></a>
         </div>
       </div>
     </section>
@@ -88,7 +94,8 @@
         <p>Here you can check out our new products with fair price on express</p>
       </div>
       <div class="row mx-auto container-fluid">
-        <div v-for="post in posts" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+        <div v-for="post in shoe" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
+          <a href=""><router-link :to="{ name: 'Product', params: { id: post._id }}">
           <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
           <div class="star">
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
@@ -96,6 +103,7 @@
           <h5 class="p-name">{{post.title}}</h5>
           <h4 class="p-price">{{post.content.substring(0, 20) + "..."}}</h4>
           <button class="buy-button">BUY NOW</button>
+          </router-link></a>
         </div>
       </div>
     </section>
@@ -118,10 +126,19 @@ export default {
   data() {
     return {
       posts: [],
+      featured: [],
+      watches: [],
+      shoe: [],
+      clothing: [],
     };
   },
   async created() {
     this.posts = await getPosts();
+    const items = await getPosts();
+    this.featured = items.filter(items => items.rating == 5).splice(0, 4);
+    this.watches = items.filter(items => items.category == 'Watch').splice(0, 4);
+    this.shoe = items.filter(items => items.category == 'Shoe').splice(0, 4);
+    this.clothing = items.filter(items => items.category != 'Shoe' || items.category == 'Watch' || items.category == 'Bag').splice(0, 4);
   },
 };
 </script>
