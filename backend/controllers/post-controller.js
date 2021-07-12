@@ -74,4 +74,13 @@ const deletePost = async (req, res) => {
     }
 }
 
-module.exports = { getPosts, getPostByID, createPost, updatePost, deletePost }
+const searchPosts = async (req, res) => {
+    try {
+        const search = await Post.find({ title: new RegExp(req.params.title, 'i')});
+        res.status(200).json(search);
+    } catch (error) {
+        res.status(404).json({ message: error });
+    }
+}
+
+module.exports = { getPosts, getPostByID, createPost, updatePost, deletePost, searchPosts }

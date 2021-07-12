@@ -5,7 +5,7 @@ import AddPost from '../views/AddPost.vue'
 import EditPost from '../views/EditPost.vue'
 import Shop from '../views/Shop.vue'
 import Product from '../views/Product.vue'
-
+import SearchPost from '../views/SearchPost.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -28,6 +28,11 @@ const routes = [
     path: '/shop',
     name: 'Shop',
     component: Shop
+  },
+  {
+    path: '/search',
+    name: 'SearchPost',
+    component: SearchPost
   },
   {
     path: '/product/:id',

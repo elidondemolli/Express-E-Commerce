@@ -2,6 +2,10 @@
   <div class="container">
     <section id="featured" class="my-5 py-5">
       <div class="container mt-5 py-5">
+        <div class="hamam2">
+          <input type="text" v-model="title" />
+          <input type="submit" @click.prevent="filteredNames" value="Search" />
+        </div>
         <h3>Our Products</h3>
         <hr />
         <p>
@@ -9,6 +13,7 @@
         </p>
       </div>
       <div class="row mx-auto container">
+        <div v-if="posts.length <= 0"><h1>{{ notFound }}</h1></div>
         <div
           v-for="post in posts"
           :key="post._id"
@@ -45,42 +50,24 @@
 </template>
 
 <script>
-import {
-  getPosts,
-  getPostByID,
-  createPost,
-  updatePost,
-  deletePost,
-} from "../api/posts";
+import { getPosts, searchPosts } from "../api/posts";
 
 export default {
-  name: "Shop",
   data() {
     return {
+      title: "",
       posts: [],
+      notFound: "Sorry there, i cant find anything with that word :(",
     };
   },
   async created() {
-    const products = await getPosts();
-    this.posts = products;
+    this.posts = await getPosts();
+  },
+  computed: {
+    async filteredNames() {
+      if (this.title == null || this.title == "") this.posts = await getPosts();
+      this.posts = await searchPosts(this.title);
+    },
   },
 };
 </script>
-
-<style>
-.product img {
-  width: 100%;
-  height: 61.8%;
-  box-sizing: border-box;
-  object-fit: cover;
-}
-
-.p-price {
-  color: #4e4e4e;
-}
-
-a {
-  text-decoration: none !important;
-  color: black !important;
-}
-</style>

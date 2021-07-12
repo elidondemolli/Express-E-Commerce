@@ -1,10 +1,15 @@
 import axios from 'axios';
 
+export const searchPosts = async (title) => {
+    const res = await axios.get(`/api/post/search/${title}`);
+    return res.data;
+}
+
 export const getPosts = async () => {
     const res = await axios.get('/api/post/');
     // return res.data.splice(0, 4);
     console.log(res.data)
-    return res.data; 
+    return res.data.sort().reverse(); 
 }
 
 export const getPostByID = async (id) => {
