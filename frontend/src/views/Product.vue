@@ -17,7 +17,8 @@
           </select>
           <input type="number" value="1" />
           <button class="buy-btn">Add to Cart</button>
-          <button class="buy-btn"><router-link :to="{ name: 'Edit-post', params: { id: product._id }}">Edit</router-link></button>
+          <router-link :to="{ name: 'Edit-post', params: { id: product._id }}"><input type="submit" class="buy-btn" value="Edit"></router-link>
+          <input type="submit" value="DELETE" class="buy-btn" color="red" @click="removePost(product._id)">
           <h4 class="mt-5 mb-3">Product Details</h4>
           <span>{{ product.content }}</span>
         </div>
@@ -83,6 +84,10 @@ export default {
   methods: {
     reloadPage() {
       window.location.reload();
+    },
+    async removePost(id) {
+      await deletePost(id);
+      this.$router.push({ name: "Shop"});
     }
   },
 };

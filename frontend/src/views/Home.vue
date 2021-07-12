@@ -8,7 +8,7 @@
           SHOOMATIC OFFERS YOUR VERY COMFORTABLE <br />TIME ON WALKING AND
           EXCERICSES.
         </p>
-        <button>SHOP NOW</button>
+        <a href="/shop"><button> SHOP NOW</button></a>
       </div>
     </section>
     <!-- <section id="braind">
@@ -24,7 +24,7 @@
       </div>
       <div class="row mx-auto container-fluid">
         <div v-for="post in featured" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
-          <a href=""><router-link :to="{ name: 'Product', params: { id: post._id }}">
+          <a><router-link :to="{ name: 'Product', params: { id: post._id }}">
           <img class="img-fluid mb-3" :src="`${post.image}`" alt="">
           <div class="star"> 
             <i v-for="post in post.rating" :key="post.id" class="fas fa-star"></i>
