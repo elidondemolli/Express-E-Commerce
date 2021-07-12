@@ -12,7 +12,7 @@
         <div
           v-for="post in posts"
           :key="post._id"
-          class="product text-center col-lg-3 col-md-4 col-6"
+          class="product text-center col-lg-3 col-md-4 col-12"
         >
           <a href=""
             ><router-link :to="{ name: 'Product', params: { id: post._id } }">
@@ -61,7 +61,8 @@ export default {
     };
   },
   async created() {
-    this.posts = await getPosts();
+    const products = await getPosts();
+    this.posts = products.sort().reverse();
   },
 };
 </script>
