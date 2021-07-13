@@ -2,6 +2,7 @@
   <div>
     <section id="home">
       <div class="container">
+        <h5 v-if="!isLoggedIn">Welcome BISHA</h5>
         <h5>NEW ARRIVALS</h5>
         <h1><span>BEST PRICE</span> THIS YEAR</h1>
         <p>
@@ -121,6 +122,8 @@ import {
   deletePost,
 } from "../api/posts";
 
+import { mapGetters } from 'vuex';
+
 export default {
   name: "Home",
   data() {
@@ -147,6 +150,9 @@ export default {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+  },
+  computed: {
+    ...mapGetters(["isLoggedIn"])
   }
 };
 </script>
