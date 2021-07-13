@@ -6,6 +6,9 @@ import EditPost from '../views/EditPost.vue'
 import Shop from '../views/Shop.vue'
 import Product from '../views/Product.vue'
 import SearchPost from '../views/SearchPost.vue'
+import ContactUs from '../views/ContactUs.vue'
+import Login from '../views/Login.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,6 +16,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
   },
   {
     path: '/add-post',
@@ -38,6 +46,11 @@ const routes = [
     path: '/product/:id',
     name: 'Product',
     component: Product
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: ContactUs
   },
   {
     path: '/about',

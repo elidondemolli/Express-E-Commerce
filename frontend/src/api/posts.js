@@ -26,11 +26,17 @@ export const createPost = async (body) => {
 
 export const updatePost = async (id, body) => {
     const res = await axios.patch(`/api/post/${id}`, body);
-    console.log('update', updatePost)
+    console.log('update', res.data)
     return res.data;
 }
 
 export const deletePost = async (id) => {
     const res = await axios.delete(`/api/post/${id}`);
+    return res.data;
+}
+
+export const login = async (body) => {
+    const res = await axios.post(`/api/user/login`, body);
+    console.log('asd', res.data)
     return res.data;
 }

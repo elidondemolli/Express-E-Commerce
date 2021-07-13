@@ -63,9 +63,9 @@ export default {
   async created() {
     this.posts = await getPosts();
   },
-  computed: {
+  methods: {
     async filteredNames() {
-      if (this.title == null || this.title == "") this.posts = await getPosts();
+      if (this.title == null || this.title == "" || this.title == undefined) this.posts = await getPosts();
       this.posts = await searchPosts(this.title);
     },
   },

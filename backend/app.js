@@ -15,6 +15,7 @@ app.use(express.static(__dirname + "/uploads"));
 DB();
 
 // Routes
-app.use('/api/post', require('./routes/post-route'))
+app.use('/api/post', require('./routes/post-route'));
+app.use('/api/user', require('./routes/user-route'));
 
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
