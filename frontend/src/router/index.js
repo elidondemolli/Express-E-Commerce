@@ -47,13 +47,13 @@ const routes = [
     path: '/search',
     name: 'SearchPost',
     component: SearchPost,
-    // beforeEnter: (to, from, next) => {
-    //   if(localStorage.getItem('token')){
-    //     next();
-    //   } else {
-    //     next("/login");
-    //   }
-    // }
+    beforeEnter: (to, from, next) => {
+      if(localStorage.getItem('token')){
+        next();
+      } else {
+        next("/login");
+      }
+    }
   },
   {
     path: '/product/:id',
@@ -82,13 +82,6 @@ const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 };
   }
-})
-
-router.beforeEach((to, from, next) => {
-  if (to.name !== 'Home' && !localStorage.getItem('token')) 
-    next({ name: 'Login' })
-  else 
-    next()
 })
 
 export default router
