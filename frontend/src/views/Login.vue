@@ -14,7 +14,6 @@
 </template>
 <script>
 import { login } from "../api/posts";
-import { mapMutations } from 'vuex'
 export default {
   data() {
     return {
@@ -23,20 +22,14 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setUser", "setToken"]),
-    async login(e) {
-      e.preventDefault();
+    async login() {
       const res = await login({
           email: this.email,
           password: this.password,
       });
-
-      console.log('jwt', res.jwtToken)
-      localStorage.setItem('token', res.jwtToken);
       
-      const { user, token } = res;
-      this.setUser(user);
-      this.setToken(token);
+      localStorage.setItem('token', res.jwtToken);
+      this.$store.dispatch('user', res.user);
 
       this.$router.push({
         name: "Home"

@@ -3,6 +3,7 @@
     <section id="home">
       <div class="container">
         <h5 v-if="user">Welcome {{user.name}}</h5>
+        <h5 v-if="!user">Welcome Guest</h5>
         <h5>NEW ARRIVALS</h5>
         <h1><span>BEST PRICE</span> THIS YEAR</h1>
         <p>
@@ -134,7 +135,6 @@ export default {
       watches: [],
       shoe: [],
       clothing: [],
-      user: {}
     };
   },
   async created() {
@@ -145,9 +145,6 @@ export default {
     this.watches = items.filter(items => items.category == 'Watch').splice(this.generateRandomInteger(0, 3), 4);
     this.shoe = items.filter(items => items.category == 'Shoe').splice(this.generateRandomInteger(0, 3), 4);
     this.clothing = items.filter(items => items.category != 'Shoe' && items.category != 'Watch' && items.category != 'Bag').splice(this.generateRandomInteger(0, 3), 4);
-    // Get User
-    this.user = await getUsers();
-
   },
   methods: {
       generateRandomInteger(min, max) {
@@ -157,7 +154,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["isLoggedIn"])
+    ...mapGetters(["user"])
   }
 };
 </script>

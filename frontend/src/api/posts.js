@@ -1,6 +1,4 @@
 import axios from 'axios';
-axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('token');
-console.log('local',localStorage.getItem('token'))
 
 export const searchPosts = async (title) => {
     const res = await axios.get(`/api/post/search/${title}`);

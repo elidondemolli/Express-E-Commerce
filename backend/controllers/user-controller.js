@@ -40,7 +40,7 @@ const login = async (req, res) => {
             expiresIn: 3600
         });
 
-        return res.status(200).json({ jwtToken });
+        return res.status(200).json({ jwtToken, user });
 
     } catch (error) {
         console.log(error)

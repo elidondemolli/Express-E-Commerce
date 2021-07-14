@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 fixed-top">
       <div class="container">
-        <a href="/"><img height="50px" src="../img/download.png"></a>
+        <router-link to="/"><img height="50px" src="../img/download.png"></router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -16,22 +16,31 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+            <li v-if="user" class="nav-item">
               <router-link class="nav-link" to="/">Home</router-link>
             </li>
-            <li class="nav-item">
+            <li v-if="user" class="nav-item">
               <router-link class="nav-link" to="/shop">Shop</router-link>
             </li>
-            <li class="nav-item">
+            <li v-if="user" class="nav-item">
               <router-link class="nav-link" to="/add-post">Add Post</router-link>
             </li>
-            <li class="nav-item">
+            <li v-if="user" class="nav-item">
               <router-link class="nav-link" to="/about">About</router-link>
             </li>
-            <li class="nav-item">
+            <li v-if="user" class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" @click="handleClick" to="/login">Logout</a>
+            </li>
+            <li v-if="!user" class="nav-item">
+              <router-link class="nav-link" to="/login">Login</router-link>
+            </li>
+            <li v-if="!user" class="nav-item">
+              <router-link class="nav-link" to="/register">Register</router-link>
+            </li>
+            <li v-if="user" class="nav-item">
               <i class="fal fa-search"></i>
             </li>
-            <li class="nav-item">
+            <li v-if="user" class="nav-item">
               <i class="fal fa-shopping-bag"></i>
             </li>
           </ul>
@@ -102,12 +111,30 @@
 
 
 <script>
+import { getUsers } from './api/posts';
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
-      toggledNav: false
     }
   },
+  async created(){
+    const res = await getUsers();
+    this.$store.dispatch('user', res)
+  },
+  methods: {
+    handleClick(){
+      localStorage.removeItem('token');
+      this.$store.dispatch('user', null);
+      this.$router.push({
+        name: "Login"
+      });
+    }
+  },
+  computed: {
+    ...mapGetters(["user"])
+  }
 }
 </script>
 

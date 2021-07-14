@@ -3,6 +3,9 @@ import Vuex from 'vuex'
 import App from './App.vue'
 import router from './router'
 import { BootstrapVue, IconsPlugin} from 'bootstrap-vue'
+import axios from 'axios';
+axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('token');
+console.log(axios.defaults.headers.common['x-auth-token'])
 
 Vue.config.productionTip = false
 Vue.use(Vuex)
@@ -16,20 +19,20 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 const store = new Vuex.Store({
   state: {
     user: null,
-    token: null,
+  },
+  getters: {
+    user: (state) => {
+      return state.user;
+    }
+  },
+  actions: {
+    user(context, user) {
+      context.commit('user', user);
+    }
   },
   mutations: {
-    setUser(state, user) {
+    user(state, user) {
       state.user = user;
-    },
-    setToken(state, token) {
-      state.token = token;
-    },
-  },
-  actions: {},
-  getters: {
-    isLoggedIn(state) {
-      return !!state.token;
     }
   },
 });
@@ -39,7 +42,3 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
-
-
-
-export default store
