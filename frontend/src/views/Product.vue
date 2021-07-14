@@ -17,8 +17,8 @@
           </select>
           <input type="number" value="1" />
           <button class="buy-btn">Add to Cart</button>
-          <router-link :to="{ name: 'Edit-post', params: { id: product._id }}"><input type="submit" class="buy-btn" value="Edit"></router-link>
-          <input type="submit" value="DELETE" class="buy-btn" color="red" @click="removePost(product._id)">
+          <router-link v-if="user" :to="{ name: 'Edit-post', params: { id: product._id }}"><input type="submit" class="buy-btn" value="Edit"></router-link>
+          <input v-if="user" type="submit" value="DELETE" class="buy-btn" color="red" @click="removePost(product._id)">
           <h4 class="mt-5 mb-3">Product Details</h4>
           <span>{{ product.content }}</span>
         </div>
@@ -67,6 +67,7 @@ import {
   updatePost,
   deletePost,
 } from "../api/posts";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "Product",
@@ -90,6 +91,9 @@ export default {
       this.$router.push({ name: "Shop"});
     }
   },
+  computed: {
+    ...mapGetters(["user"])
+  }
 };
 </script>
 

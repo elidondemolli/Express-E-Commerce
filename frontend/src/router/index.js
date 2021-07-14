@@ -9,8 +9,8 @@ import SearchPost from '../views/SearchPost.vue'
 import ContactUs from '../views/ContactUs.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
-
 Vue.use(VueRouter)
+
 
 const routes = [
   {
@@ -41,12 +41,19 @@ const routes = [
   {
     path: '/shop',
     name: 'Shop',
-    component: Shop
+    component: Shop,
   },
   {
     path: '/search',
     name: 'SearchPost',
-    component: SearchPost
+    component: SearchPost,
+    // beforeEnter: (to, from, next) => {
+    //   if(localStorage.getItem('token')){
+    //     next();
+    //   } else {
+    //     next("/login");
+    //   }
+    // }
   },
   {
     path: '/product/:id',
@@ -75,6 +82,13 @@ const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 };
   }
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Home' && !localStorage.getItem('token')) 
+    next({ name: 'Login' })
+  else 
+    next()
 })
 
 export default router
