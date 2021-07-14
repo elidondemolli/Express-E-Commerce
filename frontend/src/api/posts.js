@@ -1,4 +1,6 @@
 import axios from 'axios';
+axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('token');
+console.log('local',localStorage.getItem('token'))
 
 export const searchPosts = async (title) => {
     const res = await axios.get(`/api/post/search/${title}`);
@@ -38,5 +40,17 @@ export const deletePost = async (id) => {
 export const login = async (body) => {
     const res = await axios.post(`/api/user/login`, body);
     console.log('asd', res.data)
+    return res.data;
+}
+
+export const register = async (body) => {
+    const res = await axios.post('/api/user/register', body);
+    console.log('register', res.data);
+    return res.data;
+}
+
+export const getUsers = async () => {
+    const res = await axios.get('/api/auth/');
+    console.log('currUser', res.data);
     return res.data;
 }

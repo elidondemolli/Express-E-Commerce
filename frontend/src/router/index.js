@@ -8,6 +8,7 @@ import Product from '../views/Product.vue'
 import SearchPost from '../views/SearchPost.vue'
 import ContactUs from '../views/ContactUs.vue'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register
   },
   {
     path: '/add-post',
