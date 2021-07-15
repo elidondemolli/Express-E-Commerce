@@ -29,6 +29,7 @@ export default {
       });
       
       localStorage.setItem('token', res.jwtToken);
+      localStorage.setItem('name', res.user.name)
       this.$store.dispatch('user', res.user);
 
       this.$router.push({

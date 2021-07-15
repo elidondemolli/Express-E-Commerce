@@ -16,7 +16,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
-            <li v-if="user" class="nav-item">
+            <li  class="nav-item">
               <router-link class="nav-link" to="/">Home</router-link>
             </li>
             <li v-if="user" class="nav-item">
@@ -112,7 +112,7 @@
 
 <script>
 import { getUsers } from './api/posts';
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -130,7 +130,7 @@ export default {
       this.$router.push({
         name: "Login"
       });
-    }
+    },
   },
   computed: {
     ...mapGetters(["user"])

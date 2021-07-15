@@ -9,8 +9,8 @@ import SearchPost from '../views/SearchPost.vue'
 import ContactUs from '../views/ContactUs.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
-Vue.use(VueRouter)
 
+Vue.use(VueRouter)
 
 const routes = [
   {
@@ -31,12 +31,26 @@ const routes = [
   {
     path: '/add-post',
     name: 'Add-post',
-    component: AddPost
+    component: AddPost,
+    beforeEnter: (to, from, next) => {
+      if(localStorage.getItem('token')){
+        next();
+      } else {
+        next("/login");
+      }
+    }
   },
   {
     path: '/edit-post/:id',
     name: 'Edit-post',
-    component: EditPost
+    component: EditPost,
+    beforeEnter: (to, from, next) => {
+      if(localStorage.getItem('token')){
+        next();
+      } else {
+        next("/login");
+      }
+    }
   },
   {
     path: '/shop',
@@ -58,7 +72,7 @@ const routes = [
   {
     path: '/product/:id',
     name: 'Product',
-    component: Product
+    component: Product,
   },
   {
     path: '/contact',
