@@ -3,8 +3,8 @@
     <section id="featured" class="my-5 py-5">
       <div class="container mt-5 py-5">
         <div class="hamam2">
-          <input type="text" v-model="title" />
-          <input type="submit" @click.prevent="filteredNames" value="Search" />
+          <input class="" type="text" v-model="title" />
+          <input class="" type="submit" @click.prevent="filteredNames" value="Search" />
         </div>
         <h3>Our Products</h3>
         <hr />
