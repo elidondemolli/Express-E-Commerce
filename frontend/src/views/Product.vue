@@ -18,7 +18,7 @@
           <input type="number" value="1" />
           <button class="buy-btn">Add to Cart</button>
           <router-link v-if="user != undefined && user.role == 'admin'" :to="{ name: 'Edit-post', params: { id: product._id }}"><input type="submit" class="buy-btn" value="Edit"></router-link>
-          <input v-if="user != undefined && user.role == 'admin'" type="submit" value="DELETE" class="buy-btn" color="red" @click="removePost(product._id)">
+          <input v-if="user != undefined && user.role == 'admin'" type="submit" value="DELETE" class="buy-btn" @click="removePost(product._id)">
           <h4 class="mt-5 mb-3">Product Details</h4>
           <span>{{ product.content }}</span>
         </div>
@@ -96,6 +96,12 @@ export default {
 </script>
 
 <style>
+body > div > div > section.container.sproduct.my-5.pt-5 > div > div.col-lg-5.col-md-12.col-12 > img{
+  min-height:100%;
+  min-width: 100%;
+  object-fit: cover;
+}
+
 .small-img-group {
   display: flex;
   justify-content: space-between;

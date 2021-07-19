@@ -59,7 +59,6 @@ export default {
 body > div > div > div > div.col-md-6.mb-3{
   background: url("../../img/login.jpg") no-repeat;
   background-size: cover;
-  background-size: cover;
 }
 
 .content{
@@ -75,29 +74,9 @@ body > div > div > div > div.col-md-6.mb-3{
 }
 
 .form-control{
-    display: block;
-    width:100%;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height:1.5;
-    border-color: #00ac96 !important;
-    border-style: solid !important;
-    border-width: 0 0 1px 0 !important;
-    padding: 0px !important;
-    color:#495057;
-    height: auto;
-    border-radius: 0;
-    background-color: #fff;
-    background-clip: padding-box;
 }
 
-
 .form-control:focus{
-    color: #495057;
-    background-color: #fff;
-    border-color: #fff;
-    outline: 0;
-    box-shadow: none;
 }
 .birthday-section{
     padding: 15px;

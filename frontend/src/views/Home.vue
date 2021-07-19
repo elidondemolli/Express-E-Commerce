@@ -5,10 +5,9 @@
         <h5 v-if="user">Welcome {{user.name}}</h5>
         <h5 v-if="!user">Welcome Guest</h5>
         <h5>NEW ARRIVALS</h5>
-        <h1><span>BEST PRICE</span> THIS YEAR</h1>
+        <h1><span>BEST PRICES</span> THIS YEAR</h1>
         <p>
-          SHOOMATIC OFFERS YOUR VERY COMFORTABLE <br />TIME ON WALKING AND
-          EXCERICSES.
+          EXPRESS<br />A store that sells not just outfits but a trend.
         </p>
         <a href="/shop"><button> SHOP NOW</button></a>
       </div>
@@ -22,7 +21,7 @@
       <div class="container text-center mt-5 py-5">
         <h3>Our Featured Products</h3>
         <hr class="mx-auto">
-        <p>Here you can check out our new products with fair price on express</p>
+        <p>Here you can check out our new products with fair prices on express</p>
       </div>
       <div class="row mx-auto container-fluid">
         <div v-for="post in featured" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
@@ -51,7 +50,7 @@
       <div class="container text-center mt-5 py-5">
         <h3>Clothes</h3>
         <hr class="mx-auto">
-        <p>Here you can check out our new products with fair price on express</p>
+        <p>Here you can check out our new clothes with fair prices on express</p>
       </div>
       <div class="row mx-auto container-fluid">
         <div v-for="post in clothing" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
@@ -72,7 +71,7 @@
       <div class="container text-center mt-5 py-5">
         <h3>Best Watches</h3>
         <hr class="mx-auto">
-        <p>Here you can check out our new products with fair price on express</p>
+        <p>Here you can check out our new watches with fair price on express</p>
       </div>
       <div class="row mx-auto container-fluid">
         <div v-for="post in watches" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
@@ -93,7 +92,7 @@
       <div class="container text-center mt-5 py-5">
         <h3>Best Shoes</h3>
         <hr class="mx-auto">
-        <p>Here you can check out our new products with fair price on express</p>
+        <p>Here you can check out our new shoes with fair price on express</p>
       </div>
       <div class="row mx-auto container-fluid">
         <div v-for="post in shoe" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">

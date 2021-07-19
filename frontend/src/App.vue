@@ -23,7 +23,13 @@
               <router-link class="nav-link" to="/shop">Shop</router-link>
             </li>
             <li v-if="user" class="nav-item">
+              <router-link class="nav-link" to="/search">Shop Search</router-link>
+            </li>
+            <li v-if="user != undefined && user.role == 'admin'" class="nav-item">
               <router-link class="nav-link" to="/add-post">Add Post</router-link>
+            </li>
+            <li v-if="user" class="nav-item">
+              <router-link class="nav-link" to="/contact">Contact</router-link>
             </li>
             <li v-if="user" class="nav-item">
               <router-link class="nav-link" to="/about">About</router-link>

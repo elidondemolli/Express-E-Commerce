@@ -26,7 +26,9 @@
             v-model="product.content"
           />
         </div>
-        <img class="img-fluid mb-3" :src="`/${product.image}`" alt="" />
+        <div>
+          <img style="" class="img-fluid mb-3" :src="`/${product.image}`" alt="" />
+        </div>
         <div class="input_field">
           <label>Image</label>
           <input
@@ -127,6 +129,12 @@ export default {
 
 
 <style>
+body > div > div > section > form > div:nth-child(3) > img {
+  min-height:100%;
+  min-width: 100%;
+  object-fit: cover;
+}
+
 .wrapper {
   margin-top: 140px;
   max-width: 800px !important;

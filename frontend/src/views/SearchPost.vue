@@ -2,15 +2,17 @@
   <div class="container">
     <section id="featured" class="my-5 py-5">
       <div class="container mt-5 py-5">
-        <div class="hamam2">
-          <input class="" type="text" v-model="title" />
-          <input class="" type="submit" @click.prevent="filteredNames" value="Search" />
+        <div style="float: right;" class="hamam2">
+          <input class="search" type="text" v-model="title" />
+          <input class="button" type="submit" @click.prevent="filteredNames" value="Search" />
         </div>
-        <h3>Our Products</h3>
+        <div>
+          <h3>Our Products</h3>
         <hr />
         <p>
           Here you can check out our new products with fair prices on Express
         </p>
+        </div>
       </div>
       <div class="row mx-auto container">
         <div v-if="posts.length <= 0"><h1>{{ notFound }}</h1></div>
@@ -71,3 +73,29 @@ export default {
   },
 };
 </script>
+
+<style>
+@media only screen and (max-width: 768px) {
+  .hamam2{
+    float: none !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hamam2 .search {
+    width: 80%;
+  }
+
+  .hamam2 .button {
+    width: 20%;
+  }
+}
+
+.button:hover{
+    border-color: #5a5a5a;
+    background-color:  #5a5a5a;
+    color: rgb(255, 255, 255);
+    transition: 0.3s ease;
+}
+</style>
