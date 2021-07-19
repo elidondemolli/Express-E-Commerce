@@ -9,7 +9,7 @@
         </div>
         <div class="input_field">
           <label>Phone Number</label>
-          <input type="number" class="input" name="number" v-model="form.number" />
+          <input type="tel" class="input" name="number" v-model="form.number" />
         </div>
         <div class="input_field">
           <label>Title</label>
