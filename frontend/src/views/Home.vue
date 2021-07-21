@@ -17,7 +17,7 @@
         <img src="../../img/brandLogos/chanel.png" alt="">
       </div>
     </section> -->
-    <section id="featured" class="my-5 pb-5">
+    <section id="featured" class="my-5">
       <div class="container text-center mt-5 py-5">
         <h3>Our Featured Products</h3>
         <hr class="mx-auto">
@@ -38,7 +38,7 @@
       </div>
     </section>
 
-    <section id="banner" class="my-5 py-5">
+    <section id="banner" class="my-5">
       <div class="container">
         <h4>MID SEASON SALE</h4>
         <h1>AUTUNUM COLLECTION<br>UP TO 20%</h1>
@@ -46,8 +46,8 @@
       </div>
     </section>
 
-    <section id="clothes" class="my-5 pb-5">
-      <div class="container text-center mt-5 py-5">
+    <section id="clothes" class="my-5 py-5">
+      <div class="container text-center mt-5">
         <h3>Clothes</h3>
         <hr class="mx-auto">
         <p>Here you can check out our new clothes with fair prices on express</p>
@@ -67,8 +67,8 @@
       </div>
     </section>
 
-    <section id="watches" class="my-5 pb-5">
-      <div class="container text-center mt-5 py-5">
+    <section id="watches" class="my-5">
+      <div class="container text-center mt-5">
         <h3>Best Watches</h3>
         <hr class="mx-auto">
         <p>Here you can check out our new watches with fair price on express</p>
@@ -88,8 +88,8 @@
       </div>
     </section>
 
-    <section id="shoes" class="my-5 pb-5">
-      <div class="container text-center mt-5 py-5">
+    <section id="shoes" class="my-5">
+      <div class="container text-center mt-5">
         <h3>Best Shoes</h3>
         <hr class="mx-auto">
         <p>Here you can check out our new shoes with fair price on express</p>

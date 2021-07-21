@@ -21,6 +21,7 @@
               <p class="dark-grey-text">
                 We will get back to you as soon as we can :).
               </p>
+              <div v-if="message" class="alert alert-success">{{message}}</div>
               <form
                 method="POST"
                 @submit.prevent="submitForm"
@@ -37,6 +38,16 @@
                     class="form-control"
                   />
                 </div>
+                <!-- <div class="md-form">
+                  <i class="fas fa-user"> </i>
+                  <label for="form-email">Your email</label>
+                  <input
+                    type="text"
+                    id="form-email"
+                    v-model="form.to"
+                    class="form-control"
+                  />
+                </div> -->
                 <div class="md-form mt-2">
                   <i class="fas fa-phone"></i>
                   <label for="form-email">Your phone number</label>
@@ -124,9 +135,10 @@ export default {
   name: "Contact",
   data() {
     return {
+      message: "",
       form: {
         to: "neuerm878@gmail.com",
-        from: "robertlewa878@gmail.com",
+        from: "neuerm878@gmail.com",
         subject: "",
         text: "",
         name: "",
@@ -136,7 +148,8 @@ export default {
   },
   methods: {
     async submitForm() {
-      const response = await mail({ 
+      try {
+        const response = await mail({ 
         to: this.form.to,
         from: this.form.from,
         subject: this.form.subject,
@@ -145,7 +158,16 @@ export default {
         text: this.form.text
        });
 
-      this.$router.push({ name: "Home" });
+       this.message = "Email Sent Successfully!";
+
+       setTimeout(() => {
+         this.$router.push({ name: "Home" });
+       }, 1000);
+
+      } catch (error) {
+        console.log(error)
+      }
+      
     },
   },
 };
