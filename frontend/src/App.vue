@@ -126,8 +126,13 @@ export default {
     }
   },
   async created(){
-    const res = await getUsers();
+    try {
+      const res = await getUsers();
     this.$store.dispatch('user', res)
+    } catch (error) {
+      localStorage.removeItem('token')
+    }
+    
   },
   methods: {
     handleClick(){

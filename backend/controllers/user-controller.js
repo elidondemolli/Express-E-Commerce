@@ -37,7 +37,7 @@ const login = async (req, res) => {
         }
 
         const jwtToken = jwt.sign(payload, process.env.JWT_KEY, {
-            expiresIn: 3600
+            expiresIn: '2h'
         });
 
         return res.status(200).json({ jwtToken, user });
@@ -72,7 +72,7 @@ const register = async (req, res) => {
         }
 
         const jwtToken = jwt.sign(payload, process.env.JWT_KEY, {
-            expiresIn: 3600
+            expiresIn: '2h'
         });
         
         await user.save();
