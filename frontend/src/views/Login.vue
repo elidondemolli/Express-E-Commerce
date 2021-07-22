@@ -34,7 +34,7 @@
               class="form-check-input"
               id="checkbox"
             />
-            <label class="form-check-label" for="checkbox">Remember Me</label>
+            <router-link to="/forgot-password" class="form-check-label" for="checkbox">Forgot Password?</router-link>
           </div>
           <button type="submit" class="btn btn-class">Login</button>
         </form>

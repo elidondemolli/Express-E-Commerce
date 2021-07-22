@@ -52,3 +52,16 @@ export const getUsers = async () => {
     console.log('currUser', res.data);
     return res.data;
 }
+
+export const forgotPassword = async (body) => {
+    const res = await axios.put('/api/user/forgot-password', body);
+    console.log('forgotPassword', res.data);
+    return res.data;
+}
+
+export const resetPassword = async (token, body) => {
+    const res = await axios.put(`/api/user/reset-password/${token}`, body);
+    console.log('resetPassword', res.data);
+    return res.data;
+}
+
