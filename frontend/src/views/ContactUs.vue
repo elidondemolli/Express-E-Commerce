@@ -38,16 +38,16 @@
                     class="form-control"
                   />
                 </div>
-                <!-- <div class="md-form">
-                  <i class="fas fa-user"> </i>
-                  <label for="form-email">Your email</label>
+                <div class="md-form">
+                  <i class="fas fa-envelope"></i>
+                  <label for="form-email"> Your email</label>
                   <input
                     type="text"
                     id="form-email"
-                    v-model="form.to"
+                    v-model="form.email"
                     class="form-control"
                   />
-                </div> -->
+                </div>
                 <div class="md-form mt-2">
                   <i class="fas fa-phone"></i>
                   <label for="form-email">Your phone number</label>
@@ -143,6 +143,7 @@ export default {
         text: "",
         name: "",
         number: "",
+        email: "",
       },
     };
   },
@@ -155,7 +156,8 @@ export default {
         subject: this.form.subject,
         name: this.form.name,
         phoneNumber: this.form.number,
-        text: this.form.text
+        text: this.form.text,
+        email: this.form.email
        });
 
        this.message = "Email Sent Successfully!";

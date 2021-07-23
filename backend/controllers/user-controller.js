@@ -110,8 +110,13 @@ const forgotPassword = async (req, res) => {
         from: 'neuerm878@gmail.com',
         to: email,
         subject: 'Express Forgot Password Account',
-        html: `<h2>Please click on given link to proceed with our forgot password procedure</h2>
-               <a href="http://localhost:8080/reset-password/${token}">http://express.com/forgot-password</a>`,
+        html: `<p>Someone (hopefully you) has requested a password reset for your Express account. <br> Follow the link below to set a new password: <br>
+                <a href="http://localhost:8080/reset-password/${token}">http://www.express.com/forgot-password</a> 
+                <br>
+                If you don't wish to reset your password, disregard this email and no action will be taken.
+                <br>
+                The Express Team
+                <p>`,
     };
 
     try {

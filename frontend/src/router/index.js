@@ -23,12 +23,26 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: (to, from, next) => {
+      if(!localStorage.getItem('token')){
+        next();
+      } else {
+        next("/");
+      }
+    }
   },
   {
     path: '/register',
     name: 'Register',
-    component: Register
+    component: Register,
+    beforeEnter: (to, from, next) => {
+      if(!localStorage.getItem('token')){
+        next();
+      } else {
+        next("/");
+      }
+    }
   },
   {
     path: '/forgot-password',

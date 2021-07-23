@@ -66,11 +66,6 @@ body > div > div > div > div.col-md-6.mb-3 {
   font-weight: 600 !important;
 }
 
-.form-control {
-}
-
-.form-control:focus {
-}
 .birthday-section {
   padding: 15px;
 }

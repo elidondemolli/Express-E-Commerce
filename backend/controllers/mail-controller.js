@@ -4,6 +4,7 @@ require('dotenv').config();
 const mail = (req, res) => {
   const name = req.body.name;
   const phoneNumber = req.body.phoneNumber;
+  const email = req.body.email
 
   let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -18,7 +19,8 @@ const mail = (req, res) => {
     to: req.body.to,
     subject: req.body.subject,
     html:`<strong>Name: ${name}</strong> <br>
-          <strong>Phone: ${phoneNumber}</strong>` + '<br><br>' +req.body.text,
+          <strong>Phone: ${phoneNumber}</strong> <br>
+          <strong>Email: ${email}</strong>` + '<br><br>' +req.body.text,
   };
 
   transporter.sendMail(mailOptions, function (err, data) {
