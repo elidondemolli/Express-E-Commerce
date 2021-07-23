@@ -6,9 +6,9 @@
     <div class="row content">
       <div class="col-md-6 mb-3"></div>
       <div class="col-md-6">
-        <h3 class="signin-text mb-3">Sign In</h3>
+        <h3 class="signin-text mb-3">Forgot Password</h3>
         <form method="POST" @submit.prevent="forgot">
-          <div v-if="error" class="alert alert-success">{{error}}</div>
+          <div v-if="message" class="alert alert-success">{{message}}</div>
           <div class="form-group">
             <label for="email">Email</label>
             <input
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       email: "",
-      error: "",
+      message: "",
     };
   },
   methods: {
@@ -40,7 +40,7 @@ export default {
           email: this.email,
         });
 
-        this.error = "Email has been sent. Please check your inbox."
+        this.message = "Email has been sent. Please check your inbox."
       } catch (error) {
         console.log(error)
       }

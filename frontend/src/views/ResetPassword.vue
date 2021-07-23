@@ -6,14 +6,24 @@
     <div class="row content">
       <div class="col-md-6 mb-3"></div>
       <div class="col-md-6">
-        <h3 class="signin-text mb-3">Sign In</h3>
+        <h3 class="signin-text mb-3">Reset Password</h3>
         <form method="POST" @submit.prevent="forgot">
           <div v-if="message" class="alert alert-success">{{message}}</div>
+          <div v-if="error" class="alert alert-danger">{{error}}</div>
           <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">New Password</label>
             <input
               type="password"
               v-model="password"
+              name="password"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Confirm Password</label>
+            <input
+              type="password"
+              v-model="password2"
               name="password"
               class="form-control"
             />
@@ -30,21 +40,28 @@ export default {
   data() {
     return {
       password: "",
+      password2: "",
+      error: "",
       message: "",
     };
   },
   methods: {
     async forgot() {
       try {
-        const res = await resetPassword(this.$route.params.token, {
-          newPass: this.password,
-        });
+        if(this.password == this.password2){
+          const res = await resetPassword(this.$route.params.token, {
+            newPass: this.password,
+          });
 
-        this.message = "Passwrod has been Updated. We are redirecting you to the login page :)."
+          this.message = "Passwrod has been Updated. We are redirecting you to the login page :).";
+          this.error = "";
 
-        setTimeout(() => {
-            this.$router.push({ name: "Login" });
-        }, 3000)
+          setTimeout(() => {
+              this.$router.push({ name: "Login" });
+          }, 3000)
+        } else {
+          this.error = "Please type the same password on the two fields.";
+        }
       } catch (error) {
         console.log(error)
       }

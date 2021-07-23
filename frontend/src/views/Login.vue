@@ -27,13 +27,7 @@
               class="form-control"
             />
           </div>
-          <div class="form-group form-check">
-            <input
-              type="checkbox"
-              name="checkbox"
-              class="form-check-input"
-              id="checkbox"
-            />
+          <div>
             <router-link to="/forgot-password" class="form-check-label" for="checkbox">Forgot Password?</router-link>
           </div>
           <button type="submit" class="btn btn-class">Login</button>
