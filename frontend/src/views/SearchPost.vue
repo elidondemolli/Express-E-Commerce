@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="row mx-auto container">
-        <div v-if="posts.length <= 0"><h1>{{ notFound }}</h1></div>
+        <div v-if="notFound"><h1>{{ notFound }}</h1></div>
         <div
           v-for="post in posts"
           :key="post._id"
@@ -59,7 +59,7 @@ export default {
     return {
       title: "",
       posts: [],
-      notFound: "Sorry there, i cant find anything with that word :(",
+      notFound: "",
     };
   },
   async created() {
@@ -67,8 +67,16 @@ export default {
   },
   methods: {
     async filteredNames() {
-      if (this.title == null || this.title == "" || this.title == undefined) this.posts = await getPosts();
+      if (this.title == null || this.title == "" || this.title == undefined) {
+        this.posts = await getPosts();
+        this.notFound = "";
+      } 
       this.posts = await searchPosts(this.title);
+      if(this.posts <= 0){
+        this.notFound = "Sorry there, i cant find anything with that word :(";
+      } else {
+        this.notFound = "";
+      }
     },
   },
 };

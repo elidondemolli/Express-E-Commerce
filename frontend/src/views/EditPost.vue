@@ -118,9 +118,18 @@ export default {
           "Content-Type": "multipart/form-data",
         },
       });
+
+      this.$swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
       this.$router.push({
-        name: "Home",
-        params: { message: response.message },
+        name: "Product",
+        params: { id: this.$route.params.id },
       });
     },
   },

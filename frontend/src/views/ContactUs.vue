@@ -22,6 +22,9 @@
                 We will get back to you as soon as we can :).
               </p>
               <div v-if="message" class="alert alert-success">{{message}}</div>
+              <div v-if="error.length > 0">
+                <div v-for="e in error" v-bind:key="e" class="alert alert-danger">{{e}}</div>
+              </div>
               <form
                 method="POST"
                 @submit.prevent="submitForm"
@@ -145,32 +148,61 @@ export default {
         number: "",
         email: "",
       },
+      error: []
     };
   },
   methods: {
     async submitForm() {
       try {
-        const response = await mail({ 
-        to: this.form.to,
-        from: this.form.from,
-        subject: this.form.subject,
-        name: this.form.name,
-        phoneNumber: this.form.number,
-        text: this.form.text,
-        email: this.form.email
-       });
+        if(this.checkForm()){
+            const response = await mail({ 
+            to: this.form.to,
+            from: this.form.from,
+            subject: this.form.subject,
+            name: this.form.name,
+            phoneNumber: this.form.number,
+            text: this.form.text,
+            email: this.form.email
+        });
 
-       this.message = "Email Sent Successfully!";
+        this.error = []
+       
+        this.message = "Email Sent Successfully!";
 
-       setTimeout(() => {
-         this.$router.push({ name: "Home" });
-       }, 1000);
-
+        setTimeout(() => {
+          this.$router.push({ name: "Home" });
+        }, 1000);
+       }
       } catch (error) {
         console.log(error)
       }
-      
     },
+      checkForm(){
+        if(this.form.subject && this.form.name && this.form.number && this.form.text && this.form.email){
+          return true;
+        }
+
+        this.error = []
+        if(!this.form.name){
+          this.error.push("Name required");
+        }
+
+        if(!this.form.subject){
+          this.error.push("Subject required");
+        }
+
+        if(!this.form.number){
+          this.error.push("Number required");
+        }
+
+        if(!this.form.text){
+          this.error.push("Text required");
+        }
+
+        if(!this.form.email){
+          this.error.push("Email required");
+        }
+      }
   },
 };
 </script>
