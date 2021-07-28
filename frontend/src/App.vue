@@ -117,7 +117,7 @@
 
 
 <script>
-import { getUsers } from './api/posts';
+import { getUsers } from './api/user';
 import { mapGetters } from 'vuex'
 
 export default {

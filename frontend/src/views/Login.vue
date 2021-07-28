@@ -37,7 +37,7 @@
   </div>
 </template>
 <script>
-import { login } from "../api/posts";
+import { login } from "../api/user";
 export default {
   data() {
     return {

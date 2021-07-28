@@ -35,7 +35,7 @@
   </div>
 </template>
 <script>
-import { resetPassword } from "../api/posts";
+import { resetPassword } from "../api/user";
 export default {
   data() {
     return {

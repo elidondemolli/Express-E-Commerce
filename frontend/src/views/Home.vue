@@ -116,11 +116,6 @@
 <script>
 import {
   getPosts,
-  getUsers,
-  getPostByID,
-  createPost,
-  updatePost,
-  deletePost,
 } from "../api/posts";
 
 import { mapGetters } from 'vuex';

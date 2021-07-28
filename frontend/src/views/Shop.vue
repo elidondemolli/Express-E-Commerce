@@ -47,10 +47,6 @@
 <script>
 import {
   getPosts,
-  getPostByID,
-  createPost,
-  updatePost,
-  deletePost,
 } from "../api/posts";
 
 export default {

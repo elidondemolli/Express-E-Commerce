@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import { forgotPassword } from "../api/posts";
+import { forgotPassword } from "../api/user";
 export default {
   data() {
     return {
