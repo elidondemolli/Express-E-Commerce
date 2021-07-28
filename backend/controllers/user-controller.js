@@ -13,6 +13,24 @@ const getUsers = async (req, res) => {
     }
 }
 
+const getAllUsers = async (req, res) => {
+    try {
+        const result = await User.find().select('-password');
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ message: error });
+    }
+}
+
+const deleteUser = async (req, res) => {
+    try {
+        const result = await User.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: 'User Deleted Successfully'});
+    } catch (error) {
+        res.status(404).json({ message: error });
+    }
+}
+
 const login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -63,6 +81,7 @@ const register = async (req, res) => {
 
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
+        user.role = 'Client';
 
         const payload = {
             user: {
@@ -158,4 +177,4 @@ const resetPassword = async (req, res) => {
 
 }
 
-module.exports = { getUsers, login, register, forgotPassword, resetPassword }
+module.exports = { getUsers, getAllUsers, deleteUser, login, register, forgotPassword, resetPassword }

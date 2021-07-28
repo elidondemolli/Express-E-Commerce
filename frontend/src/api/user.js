@@ -6,6 +6,12 @@ export const getUsers = async () => {
     return res.data;
 }
 
+export const getAllUsers = async () => {
+    const res = await axios.get('/api/user/all');
+    console.log('alluser', res.data);
+    return res.data;
+}
+
 export const forgotPassword = async (body) => {
     const res = await axios.put('/api/user/forgot-password', body);
     console.log('forgotPassword', res.data);
@@ -28,4 +34,9 @@ export const register = async (body) => {
     const res = await axios.post('/api/user/register', body);
     console.log('register', res.data);
     return res.data;
+}
+
+export const deleteUser = async (id) => {
+    const res = await axios.delete(`/api/user/delete/${id}`);
+    return res.data
 }
