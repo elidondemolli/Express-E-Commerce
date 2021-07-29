@@ -131,12 +131,14 @@ export default {
     this.$store.dispatch('user', res)
     } catch (error) {
       localStorage.removeItem('token')
+      localStorage.removeItem('id')
     }
     
   },
   methods: {
     handleClick(){
       localStorage.removeItem('token');
+      localStorage.removeItem('id')
       this.$store.dispatch('user', null);
       this.$router.push({
         name: "Login"

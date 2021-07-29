@@ -88,10 +88,10 @@ import { mapGetters } from 'vuex'
           }).then( async (result) => {
             if (result.isConfirmed) {
               await deleteUser(id);
-              this.users= this.users.filter(users=>users._id != id)
+              this.users= this.users.filter(users =>  users._id != id)
               this.$swal.fire(
                 'Deleted!',
-                'Your file has been deleted.',
+                'User has been deleted.',
                 'success'
               )
             }
@@ -109,11 +109,10 @@ import { mapGetters } from 'vuex'
           }).then( async (result) => {
             if (result.isConfirmed) {
               await deletePost(id);
-              console.log('asdasdasdass', this.products)
-              this.products= this.products.filter(products=>products._id != id)
+              this.products= this.products.filter(products => products._id != id)
               this.$swal.fire(
                 'Deleted!',
-                'Your file has been deleted.',
+                'Post has been deleted.',
                 'success'
               )
             }

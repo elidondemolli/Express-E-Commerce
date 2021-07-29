@@ -36,6 +36,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { login } from "../api/user";
 export default {
@@ -54,6 +55,7 @@ export default {
           password: this.password,
         });
 
+        localStorage.setItem("id", res.user._id);
         localStorage.setItem("token", res.jwtToken);
         this.$store.dispatch("user", res.user);
 

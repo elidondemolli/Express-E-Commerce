@@ -14,6 +14,8 @@ import ResetPassword from '../views/ResetPassword.vue'
 import Dashboard from '../views/Dashboard.vue'
 import EditUser from '../views/EditUser.vue'
 
+import { getUserById } from '../api/user'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -49,22 +51,37 @@ const routes = [
   {
     path: '/forgot-password',
     name: 'ForgotPassword',
-    component: ForgotPassword
+    component: ForgotPassword,
+    beforeEnter: (to, from, next) => {
+      if(!localStorage.getItem('token')){
+        next();
+      } else {
+        next("/");
+      }
+    }
   },
   {
     path: '/reset-password/:token',
     name: 'ResetPassword',
-    component: ResetPassword
+    component: ResetPassword,
+    beforeEnter: (to, from, next) => {
+      if(!localStorage.getItem('token')){
+        next();
+      } else {
+        next("/");
+      }
+    }
   },
   {
     path: '/add-post',
     name: 'Add-post',
     component: AddPost,
-    beforeEnter: (to, from, next) => {
-      if(localStorage.getItem('token')){
+    beforeEnter: async (to, from, next) => {
+      const result = await getUserById(localStorage.getItem('id'));
+      if(result.role == 'Admin' && localStorage.getItem('token')){
         next();
       } else {
-        next("/login");
+        next("/");
       }
     }
   },
@@ -72,11 +89,12 @@ const routes = [
     path: '/edit-post/:id',
     name: 'Edit-post',
     component: EditPost,
-    beforeEnter: (to, from, next) => {
-      if(localStorage.getItem('token')){
+    beforeEnter: async (to, from, next) => {
+      const result = await getUserById(localStorage.getItem('id'));
+      if(result.role == 'Admin' && localStorage.getItem('token')){
         next();
       } else {
-        next("/login");
+        next("/");
       }
     }
   },
@@ -88,14 +106,7 @@ const routes = [
   {
     path: '/search',
     name: 'SearchPost',
-    component: SearchPost,
-    beforeEnter: (to, from, next) => {
-      if(localStorage.getItem('token')){
-        next();
-      } else {
-        next("/login");
-      }
-    }
+    component: SearchPost
   },
   {
     path: '/product/:id',
@@ -110,12 +121,28 @@ const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+    beforeEnter: async (to, from, next) => {
+      const result = await getUserById(localStorage.getItem('id'));
+      if(result.role == 'Admin' && localStorage.getItem('token')){
+        next();
+      } else {
+        next("/");
+      }
+    }
   },
   {
     path: '/edit-user/:id',
     name: 'EditUser',
-    component: EditUser
+    component: EditUser,
+    beforeEnter: async (to, from, next) => {
+      const result = await getUserById(localStorage.getItem('id'));
+      if(result.role == 'Admin' && localStorage.getItem('token')){
+        next();
+      } else {
+        next("/");
+      }
+    }
   },
   {
     path: '/about',
