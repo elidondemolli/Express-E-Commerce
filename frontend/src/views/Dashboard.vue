@@ -10,7 +10,7 @@
         <router-link :to="{ name: 'EditUser', params: { id: edit_id.item._id}}"><input type="submit" class="btn btn-primary" value="Edit" ></router-link>
       </template>
       <template v-slot:cell(delete)="data">
-        <input type="submit" value="Delete" class="btn btn-danger" @click="removePost(data.item._id)">
+        <input type="submit" value="Delete" class="btn btn-danger" @click="removeUser(data.item._id)">
       </template>
     </b-table>
      <div class="overflow-auto">
@@ -34,7 +34,7 @@
         <p>{{new Date(created.item.created).toLocaleString('en-GB', { timezone: 'UTC'})}}</p>
       </template>
       <template #cell(edit)="edit_id">
-        <router-link :to="{ name: 'EditUser', params: { id: edit_id.item._id}}"><input type="submit" class="btn btn-primary" value="Edit" ></router-link>
+        <router-link :to="{ name: 'Edit-post', params: { id: edit_id.item._id}}"><input type="submit" class="btn btn-primary" value="Edit" ></router-link>
       </template>
       <template v-slot:cell(delete)="data">
         <input type="submit" value="Delete" class="btn btn-danger" @click="removePost(data.item._id)">
@@ -55,7 +55,7 @@
 
 <script>
 import { getAllUsers, deleteUser } from '../api/user'
-import { getPosts } from '../api/posts'
+import { getPosts, deletePost } from '../api/posts'
 import { mapGetters } from 'vuex'
 
   export default {
@@ -76,7 +76,7 @@ import { mapGetters } from 'vuex'
         this.products = await getPosts();
     },
     methods: {
-      async removePost(id) {
+      async removeUser(id) {
         this.$swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -88,12 +88,34 @@ import { mapGetters } from 'vuex'
           }).then( async (result) => {
             if (result.isConfirmed) {
               await deleteUser(id);
+              this.users= this.users.filter(users=>users._id != id)
               this.$swal.fire(
                 'Deleted!',
                 'Your file has been deleted.',
                 'success'
               )
-              window.location.reload();
+            }
+          })
+      },
+      async removePost(id) {
+        this.$swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then( async (result) => {
+            if (result.isConfirmed) {
+              await deletePost(id);
+              console.log('asdasdasdass', this.products)
+              this.products= this.products.filter(products=>products._id != id)
+              this.$swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
             }
           })
       }
