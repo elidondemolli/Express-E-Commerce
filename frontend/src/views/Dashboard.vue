@@ -30,6 +30,14 @@
       <template #cell(content)="content">
         <p>{{content.item.content.substring(0, 200) + "..."}}</p>
       </template>
+      <template #cell(price)="price">
+        <p>{{
+                  new Intl.NumberFormat("de-DE", {
+                    style: "currency",
+                    currency: "EUR",
+                  }).format(price.item.price)
+                }}</p>
+      </template>
       <template #cell(created)="created">
         <p>{{new Date(created.item.created).toLocaleString('en-GB', { timezone: 'UTC'})}}</p>
       </template>

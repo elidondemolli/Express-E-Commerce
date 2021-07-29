@@ -15,10 +15,10 @@
             <option value="">M</option>
             <option value="">S</option>
           </select>
-          <input type="number" value="1" />
+          <input class="inputNum" type="number" value="1" />
           <button class="buy-btn">Add to Cart</button>
-          <router-link v-if="user != undefined && user.role == 'admin'" :to="{ name: 'Edit-post', params: { id: product._id }}"><input type="submit" class="buy-btn" value="Edit"></router-link>
-          <input v-if="user != undefined && user.role == 'admin'" type="submit" value="DELETE" class="buy-btn" @click="removePost(product._id)">
+          <router-link v-if="user != undefined && user.role == 'Admin'" :to="{ name: 'Edit-post', params: { id: product._id }}"><input type="submit" class="btn btn-primary" value="Edit"></router-link>
+          <input v-if="user != undefined && user.role == 'Admin'" type="submit" value="DELETE" class="btn btn-danger" @click="removePost(product._id)">
           <h4 class="mt-5 mb-3">Product Details</h4>
           <span>{{ product.content }}</span>
         </div>
@@ -116,7 +116,7 @@ body > div > div > section.container.sproduct.my-5.pt-5 > div > div.col-lg-5.col
   padding: 5px 10px;
 }
 
-.sproduct input {
+.inputNum {
   width: 50px;
   height: 40px;
   padding-left: 10px;

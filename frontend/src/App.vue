@@ -25,7 +25,10 @@
             <li v-if="user" class="nav-item">
               <router-link class="nav-link" to="/search">Shop Search</router-link>
             </li>
-            <li v-if="user != undefined && user.role == 'admin'" class="nav-item">
+            <li v-if="user != undefined && user.role == 'Admin'" class="nav-item">
+              <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
+            </li>
+            <li v-if="user != undefined && user.role == 'Admin'" class="nav-item">
               <router-link class="nav-link" to="/add-post">Add Post</router-link>
             </li>
             <li v-if="user" class="nav-item">

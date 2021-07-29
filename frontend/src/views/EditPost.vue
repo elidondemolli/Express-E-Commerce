@@ -44,7 +44,7 @@
           <label>Rating</label>
           <div class="costum_select">
             <select v-model="product.rating" name="rating" id="">
-              <option value="">Select</option>
+              <option disabled value="">Select</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
