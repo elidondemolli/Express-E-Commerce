@@ -17,7 +17,7 @@
       <div class="row mx-auto container">
         <div v-if="notFound"><h1>{{ notFound }}</h1></div>
         <div
-          v-for="post in posts"
+          v-for="post in paginatedOrders"
           :key="post._id"
           class="product text-center col-lg-3 col-md-4 col-12"
         >
@@ -47,6 +47,7 @@
           >
         </div>
       </div>
+      <button style="display: block; margin: auto;" @click="loadMore" v-if="currentPage * maxPerPage < posts.length">Load More</button>
     </section>
   </div>
 </template>
@@ -57,6 +58,8 @@ import { getPosts, searchPosts } from "../api/posts";
 export default {
   data() {
     return {
+      currentPage: 1,
+      maxPerPage: 16,
       title: "",
       posts: [],
       notFound: "",
@@ -78,7 +81,15 @@ export default {
         this.notFound = "";
       }
     },
+    loadMore() {
+      this.currentPage += 1;
+    }
   },
+  computed: {
+      paginatedOrders() {
+        return this.posts.slice(0, this.currentPage * this.maxPerPage);
+    }
+  }
 };
 </script>
 
