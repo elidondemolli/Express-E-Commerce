@@ -13,10 +13,28 @@ const getUsers = async (req, res) => {
     }
 }
 
+const getUserById = async (req, res) => {
+    try {
+        const result = await User.findById(req.params.id).select('-password');
+        res.status(200).json(result)
+    } catch (error) {
+        res.status(404).json({ message: error });
+    }
+}
+
 const getAllUsers = async (req, res) => {
     try {
         const result = await User.find().select('-password');
         res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ message: error });
+    }
+}
+
+const updateUser = async (req, res) => {
+    try {
+        const result = await User.updateOne({ _id: req.params.id}, { $set: { role: req.body.role }}, { upsert: true});
+        res.status(200).json({ message: 'User updated successfully'});
     } catch (error) {
         res.status(500).json({ message: error });
     }
@@ -177,4 +195,4 @@ const resetPassword = async (req, res) => {
 
 }
 
-module.exports = { getUsers, getAllUsers, deleteUser, login, register, forgotPassword, resetPassword }
+module.exports = { getUsers, getUserById, getAllUsers, updateUser, deleteUser, login, register, forgotPassword, resetPassword }
