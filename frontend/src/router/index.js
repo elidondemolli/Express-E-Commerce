@@ -12,6 +12,7 @@ import Register from '../views/Register.vue'
 import ForgotPassword from '../views/ForgotPassword.vue'
 import ResetPassword from '../views/ResetPassword.vue'
 import Dashboard from '../views/Dashboard.vue'
+import EditUser from '../views/EditUser.vue'
 
 Vue.use(VueRouter)
 
@@ -110,6 +111,11 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard
+  },
+  {
+    path: '/edit-user/:id',
+    name: 'EditUser',
+    component: EditUser
   },
   {
     path: '/about',

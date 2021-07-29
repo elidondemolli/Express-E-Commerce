@@ -30,6 +30,7 @@
   </div>
 </div>
 </template>
+
 <script>
 import { register } from "../api/user";
 export default {

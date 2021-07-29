@@ -11,13 +11,13 @@
         <div class="input_field">
           <label>User</label>
           <input
+            disabled
             type="text"
             v-model="user.name"
             class="input"
             name="user"
           />
         </div>
-        <div>
         <div class="input_field">
           <label>Role</label>
           <div class="costum_select">

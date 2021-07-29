@@ -6,6 +6,18 @@ export const getUsers = async () => {
     return res.data;
 }
 
+export const getUserById = async (id) => {
+    const res = await axios.get(`/api/user/${id}`);
+    console.log('byIdUser', res.data);
+    return res.data;
+}
+
+export const updateUser = async (id, body) => {
+    const res = await axios.put(`/api/user/update/${id}`, body);
+    console.log('updateUser', res.data);
+    return res.data;
+}
+
 export const getAllUsers = async () => {
     const res = await axios.get('/api/user/all');
     console.log('alluser', res.data);
