@@ -9,17 +9,18 @@
           <h6>{{ product.category }}</h6>
           <h3 class="">{{ product.title }}</h3>
           <h4 class="p-price">{{ new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(product.price) }}</h4>
-          <select class="my-3">
+          <!-- <select class="my-3">
             <option value="">XXL</option>
             <option value="">XL</option>
             <option value="">M</option>
             <option value="">S</option>
           </select>
           <input class="inputNum" type="number" value="1" />
-          <button class="buy-btn">Add to Cart</button>
+          <button class="buy-btn">Add to Cart</button> -->
+          <div style="width: 200px" class="my-3" ref="paypal"></div>
           <router-link v-if="user != undefined && user.role == 'Admin'" :to="{ name: 'Edit-post', params: { id: product._id }}"><input type="submit" class="btn btn-primary" value="Edit"></router-link>
           <input v-if="user != undefined && user.role == 'Admin'" type="submit" value="DELETE" class="btn btn-danger" @click="removePost(product._id)">
-          <h4 class="mt-5 mb-3">Product Details</h4>
+          <h4 class="mt-3 mb-3">Product Details</h4>
           <span>{{ product.content }}</span>
         </div>
       </div>
@@ -72,6 +73,8 @@ export default {
     return {
       posts: [],
       product: {},
+      loaded: false,
+      paidFor: false,
     };
   },
   async created() {
@@ -80,7 +83,46 @@ export default {
     this.posts = data.filter(item => item._id != this.$route.params.id && item.category == this.product.category).splice(0, 4);
     // this.posts = data.filter(item => item._id != this.$route.params.id && item.category == this.product.category).splice(this.generateRandomInteger(0, 3), 4);
   },
+  mounted: function() {
+    const script = document.createElement("script");
+    script.src =
+      "https://www.paypal.com/sdk/js?client-id=AerKYuczo-BCDetSNlTU7T80Bp26-r7K3ajccE6yQppnMmp6c8CTkasA_CtCFJlb3Wq_ufoGiJ5_Q1qx";
+    script.addEventListener("load", this.setLoaded);
+    document.body.appendChild(script);
+  },
   methods: {
+    setLoaded: function() {
+      this.loaded = true;
+      window.paypal
+        .Buttons({
+          style: {
+            color: 'silver',
+            shape: 'pill'
+          },
+          createOrder: (data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  description: this.product.title,
+                  amount: {
+                    currency_code: "USD",
+                    value: this.product.price
+                  }
+                }
+              ]
+            });
+          },
+          onApprove: async (data, actions) => {
+            const order = await actions.order.capture();
+            this.paidFor = true;
+            console.log(order);
+          },
+          onError: err => {
+            console.log(err);
+          }
+        })
+        .render(this.$refs.paypal);
+    },
     reloadPage() {
       window.location.reload();
     },
