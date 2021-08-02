@@ -10,7 +10,7 @@
       </div>
       <div class="row mx-auto container">
         <div
-          v-for="post in posts"
+          v-for="post in paginatedOrders"
           :key="post._id"
           class="product text-center col-lg-3 col-md-4 col-12"
         >
@@ -40,6 +40,7 @@
           >
         </div>
       </div>
+      <button style="display: block; margin: auto;" @click="loadMore" v-if="currentPage * maxPerPage < product.length">Load More</button>
     </section>
   </div>
 </template>
@@ -53,13 +54,24 @@ export default {
   name: "Shop",
   data() {
     return {
-      posts: [],
+      currentPage: 1,
+      maxPerPage: 5,
+      product: [],
     };
   },
   async created() {
-    const products = await getPosts();
-    this.posts = products;
+      this.product = await getPosts();
+    },
+    computed: {
+      paginatedOrders() {
+        return this.product.slice(0, this.currentPage * this.maxPerPage);
+    }
   },
+  methods: {
+    loadMore() {
+      this.currentPage += 1;
+    }
+  }
 };
 </script>
 

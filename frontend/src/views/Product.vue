@@ -77,7 +77,8 @@ export default {
   async created() {
     const data = await getPosts();
     this.product = await getPostByID(this.$route.params.id);
-    this.posts = data.filter(item => item.category == this.product.category).splice(0, 4);
+    this.posts = data.filter(item => item._id != this.$route.params.id && item.category == this.product.category).splice(0, 4);
+    // this.posts = data.filter(item => item._id != this.$route.params.id && item.category == this.product.category).splice(this.generateRandomInteger(0, 3), 4);
   },
   methods: {
     reloadPage() {
@@ -86,6 +87,11 @@ export default {
     async removePost(id) {
       await deletePost(id);
       this.$router.push({ name: "Shop"});
+    },
+    generateRandomInteger(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
   },
   computed: {

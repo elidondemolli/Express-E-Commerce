@@ -69,9 +69,9 @@
 
     <section id="watches" class="my-5">
       <div class="container text-center mt-5">
-        <h3>Best Watches</h3>
+        <h3>Watches</h3>
         <hr class="mx-auto">
-        <p>Here you can check out our new watches with fair price on express</p>
+        <p>Here you can check out our new watches with fair prices on express</p>
       </div>
       <div class="row mx-auto container-fluid">
         <div v-for="post in watches" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
@@ -90,9 +90,9 @@
 
     <section id="shoes" class="my-5">
       <div class="container text-center mt-5">
-        <h3>Best Shoes</h3>
+        <h3>Shoes</h3>
         <hr class="mx-auto">
-        <p>Here you can check out our new shoes with fair price on express</p>
+        <p>Here you can check out our new shoes with fair prices on express</p>
       </div>
       <div class="row mx-auto container-fluid">
         <div v-for="post in shoe" :key="post.id" class="product text-center col-lg-3 col-md-4 col-12">
@@ -141,7 +141,7 @@ export default {
     this.clothing = items.filter(items => items.category != 'Shoe' && items.category != 'Watch' && items.category != 'Bag').splice(this.generateRandomInteger(0, 3), 4);
   },
   methods: {
-      generateRandomInteger(min, max) {
+    generateRandomInteger(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
