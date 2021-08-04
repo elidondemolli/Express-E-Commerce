@@ -2,6 +2,7 @@
   <div>
     <section class="container sproduct my-5 pt-5">
       <div class="row mt-5">
+        <div v-if="paidFor" class="alert alert-success text-center">Thank you for shopping with us :)</div>
         <div class="col-lg-5 col-md-12 col-12">
           <img class="prod-img img-fluid w-100 pb-1" :src="`../../${product.image}`" alt="" />
         </div>
@@ -26,7 +27,7 @@
       </div>
     </section>
 
-    <section id="related" class="my-10 pb-5">
+    <section id="related" class="my-10">
       <div class="container text-center mt-5 py-5">
         <h3>Related Items</h3>
         <hr class="mx-auto" />
@@ -77,18 +78,18 @@ export default {
       paidFor: false,
     };
   },
-  async created() {
-    const data = await getPosts();
-    this.product = await getPostByID(this.$route.params.id);
-    this.posts = data.filter(item => item._id != this.$route.params.id && item.category == this.product.category).splice(0, 4);
-    // this.posts = data.filter(item => item._id != this.$route.params.id && item.category == this.product.category).splice(this.generateRandomInteger(0, 3), 4);
-  },
   mounted: function() {
     const script = document.createElement("script");
     script.src =
-      "https://www.paypal.com/sdk/js?client-id=AerKYuczo-BCDetSNlTU7T80Bp26-r7K3ajccE6yQppnMmp6c8CTkasA_CtCFJlb3Wq_ufoGiJ5_Q1qx";
+      "https://www.paypal.com/sdk/js?client-id=AbW4zqlEW0FoHX2rfjYDuUY6EVzoCUqntd7q9mhyvaAmKztE4hpGDwZ-VnUx_Sn5JAjCYibpo-GMXNDa&currency=EUR";
     script.addEventListener("load", this.setLoaded);
     document.body.appendChild(script);
+  },
+  async created() {
+    const data = await getPosts();
+    this.product = await getPostByID(this.$route.params.id);
+    // this.posts = data.filter(item => item._id != this.$route.params.id && item.category == this.product.category).splice(0, 4);
+    this.posts = data.filter(item => item._id != this.$route.params.id && item.category == this.product.category).splice(this.generateRandomInteger(0, 3), 4);
   },
   methods: {
     setLoaded: function() {
@@ -105,7 +106,6 @@ export default {
                 {
                   description: this.product.title,
                   amount: {
-                    currency_code: "USD",
                     value: this.product.price
                   }
                 }
@@ -115,6 +115,9 @@ export default {
           onApprove: async (data, actions) => {
             const order = await actions.order.capture();
             this.paidFor = true;
+            setTimeout(() => {
+              this.paidFor = false;
+            }, 3000);
             console.log(order);
           },
           onError: err => {
@@ -135,9 +138,10 @@ export default {
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+    
   },
   computed: {
-    ...mapGetters(["user"])
+    ...mapGetters(["user"]),
   }
 };
 </script>

@@ -18,7 +18,7 @@
               class="form-control"
             />
           </div>
-          <button type="submit" class="btn btn-class">Login</button>
+          <button type="submit" class="btn btn-class">Submit</button>
         </form>
       </div>
     </div>
