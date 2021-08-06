@@ -22,9 +22,12 @@
                 We will get back to you as soon as we can :).
               </p>
               <div v-if="message" class="alert alert-success">{{message}}</div>
-              <div v-if="error.length > 0">
-                <div v-for="e in error" v-bind:key="e" class="alert alert-danger">{{e}}</div>
-              </div>
+              <p v-if="error.length" class="alert alert-danger">
+                <b>Please correct the following error(s):</b>
+                <ul>
+                  <li v-for="e in error" v-bind:key="e" >{{ e }}</li>
+                </ul>
+              </p>
               <form
                 method="POST"
                 @submit.prevent="submitForm"

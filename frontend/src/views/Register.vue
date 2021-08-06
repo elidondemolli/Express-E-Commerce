@@ -8,9 +8,15 @@
     <div class="col-md-6">
       <h3 class="signin-text mb-3"> Sign Up</h3>
       <div v-if="message" class="alert alert-success">{{message}}</div>
-      <div v-if="error.length > 0">
+      <!-- <div v-if="error.length > 0">
         <div v-for="e in error" v-bind:key="e" class="alert alert-danger">{{e}}</div>
-      </div>
+      </div> -->
+      <p v-if="error.length" class="alert alert-danger">
+        <b>Please correct the following error(s):</b>
+        <ul>
+          <li v-for="e in error" v-bind:key="e" >{{ e }}</li>
+        </ul>
+      </p>
       <form method="POST" @submit.prevent="login">
         <div class="form-group">
           <label for="email">Name</label>
@@ -81,7 +87,7 @@ export default {
         }
 
         if(!this.email){
-          this.error.push("Subject required");
+          this.error.push("Email required");
         }
 
         if(this.password.length <= 6){
