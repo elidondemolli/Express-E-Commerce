@@ -27,7 +27,8 @@
           />
         </div>
         <div>
-          <img style="" class="img-fluid mb-3" :src="`/${product.image}`" alt="" />
+          <img v-if="!url" style="" class="img-fluid mb-3" :src="`/${product.image}`" alt="" />
+          <img class="img-fluid mb-3" v-else :src="url" />
         </div>
         <div class="input_field">
           <label>Image</label>
@@ -94,14 +95,17 @@ export default {
         price: "",
       },
       image: "",
+      url: null
     };
   },
   async created() {
     this.product = await getPostByID(this.$route.params.id);
   },
   methods: {
-    selectFile() {
+    selectFile(e) {
       this.image = this.$refs.file.files[0];
+      const file = e.target.files[0];
+      this.url = URL.createObjectURL(file);
     },
     async updateForm() {
       const formData = new FormData();
