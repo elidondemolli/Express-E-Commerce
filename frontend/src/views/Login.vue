@@ -98,4 +98,10 @@ body > div > div > div > div.col-md-6.mb-3 {
   background-color: #00ac96;
   color: #fff;
 }
+
+@media (max-width: 375px) {
+  .container-sm, .container {
+      width: 90% !important;
+  }
+}
 </style>

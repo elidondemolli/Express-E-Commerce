@@ -9,7 +9,7 @@
         <p>
           EXPRESS<br />A store that sells not just outfits but a trend.
         </p>
-        <a href="/shop"><button> SHOP NOW</button></a>
+        <a href="/search"><button> SHOP NOW</button></a>
       </div>
     </section>
     <!-- <section id="braind">
@@ -42,7 +42,7 @@
       <div class="container">
         <h4>MID SEASON SALE</h4>
         <h1>AUTUNUM COLLECTION<br>UP TO 20%</h1>
-        <button class="text-uppercase">Shop Now</button>
+        <a href="/search"><button class="text-uppercase">Shop Now</button></a>
       </div>
     </section>
 

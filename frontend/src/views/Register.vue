@@ -6,7 +6,11 @@
     <div class="col-md-6 mb-3">
     </div>
     <div class="col-md-6">
-      <h3 class="signin-text mb-3"> Sign In</h3>
+      <h3 class="signin-text mb-3"> Sign Up</h3>
+      <div v-if="message" class="alert alert-success">{{message}}</div>
+      <div v-if="error.length > 0">
+        <div v-for="e in error" v-bind:key="e" class="alert alert-danger">{{e}}</div>
+      </div>
       <form method="POST" @submit.prevent="login">
         <div class="form-group">
           <label for="email">Name</label>
@@ -39,19 +43,51 @@ export default {
       name: "",
       email: "",
       password: "",
+      message: "",
+      error: [],
     };
   },
   methods: {
     async login(e) {
-      e.preventDefault();
-      const res = await register({
-          name: this.name,
-          email: this.email,
-          password: this.password,
-      });
+      try {
+        if(this.checkForm()){
+          const res = await register({
+            name: this.name,
+            email: this.email,
+            password: this.password,
+          });
 
-      this.$router.push("/login");
+          this.error = []
+       
+          this.message = "Great! We are going to redirect you to the login page.";
+
+          setTimeout(() => {
+            this.$router.push("/login");
+          }, 1000);
+          
+        }
+      } catch (error) {
+        console.log(error)
+      }
     },
+    checkForm(){
+        if(this.name && this.email && this.password.length > 6){
+          return true;
+        }
+
+        this.error = []
+        if(!this.name){
+          this.error.push("Name required");
+        }
+
+        if(!this.email){
+          this.error.push("Subject required");
+        }
+
+        if(this.password.length <= 6){
+          this.error.push("Password must be longer than 6 characters!");
+        }
+      }
   },
 };
 </script>

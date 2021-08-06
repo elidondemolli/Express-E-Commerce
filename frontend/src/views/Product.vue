@@ -4,7 +4,7 @@
       <div class="row mt-5">
         <div v-if="paidFor" class="alert alert-success text-center">Thank you for shopping with us :)</div>
         <div class="col-lg-5 col-md-12 col-12">
-          <img class="prod-img img-fluid w-100 pb-1" :src="`../../${product.image}`" alt="" />
+          <img class="prod-img img-fluid w-100 pb-1" :src="`../../${product.image}`" alt=""  style="width: 100% !important; height: 500px !important; object-fit: cover;"/>
         </div>
         <div class="col-lg-6 col-md-12 col-12">
           <h6>{{ product.category }}</h6>
