@@ -32,6 +32,9 @@
             name="image"
           />
         </div>
+        <div>
+          <img class="img-fluid mb-3" v-if="url" :src="url" />
+        </div>
         <div class="input_field">
           <label>Rating</label>
           <div class="costum_select">
@@ -81,11 +84,14 @@ export default {
         price: "",
       },
       image: "",
+      url: null
     };
   },
   methods: {
-    selectFile() {
+    selectFile(e) {
       this.image = this.$refs.file.files[0];
+      const file = e.target.files[0];
+      this.url = URL.createObjectURL(file);
     },
     async submitForm() {
       const formData = new FormData();
@@ -205,6 +211,12 @@ export default {
 
 .wrapper .form .input_field .btn:hover {
   background: #9e9e9e;
+}
+
+body > div > div > section > form > div:nth-child(4) > img {
+  min-width: 100%;
+  object-fit: cover;
+  min-height: 100%;
 }
 
 @media (max-width: 420px) {
