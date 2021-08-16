@@ -134,7 +134,7 @@ export default {
   async created() {
     this.posts = await getPosts();
     const items = await getPosts();
-    this.featured = items.filter(item => item.rating == 5).splice(this.generateRandomInteger(0, 3), 4);
+    this.featured = items.filter(item => item.rating == 5).splice(this.generateRandomInteger(0, 11), 4);
     // this.featured = items.filter(item => item.rating == 5).splice(0, 4);
     this.watches = items.filter(items => items.category == 'Watch').splice(this.generateRandomInteger(0, 3), 4);
     this.shoe = items.filter(items => items.category == 'Shoe').splice(this.generateRandomInteger(0, 3), 4);

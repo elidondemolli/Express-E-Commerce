@@ -10,14 +10,9 @@
           <h6>{{ product.category }}</h6>
           <h3 class="">{{ product.title }}</h3>
           <h4 class="p-price">{{ new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(product.price) }}</h4>
-          <!-- <select class="my-3">
-            <option value="">XXL</option>
-            <option value="">XL</option>
-            <option value="">M</option>
-            <option value="">S</option>
-          </select>
-          <input class="inputNum" type="number" value="1" />
-          <button class="buy-btn">Add to Cart</button> -->
+          <!-- <button @click="addToCart" class="buy-btn">Add to Cart</button> -->
+          <a type="submit" class="card-link-secondary small text-uppercase" @click="addToCart"><i
+                        class="fas fa-shopping-cart mr-1"></i> Add to cart </a>
           <div style="width: 200px" class="my-3" ref="paypal"></div>
           <router-link v-if="user != undefined && user.role == 'Admin'" :to="{ name: 'Edit-post', params: { id: product._id }}"><input type="submit" class="btn btn-primary" value="Edit"></router-link>
           <input v-if="user != undefined && user.role == 'Admin'" type="submit" value="DELETE" class="btn btn-danger" @click="removePost(product._id)">
@@ -66,6 +61,7 @@ import {
   getPostByID,
   deletePost,
 } from "../api/posts";
+import {carts} from '../api/user'
 import { mapGetters } from 'vuex';
 
 export default {
@@ -92,6 +88,26 @@ export default {
     this.posts = data.filter(item => item._id != this.$route.params.id && item.category == this.product.category).splice(this.generateRandomInteger(0, 3), 4);
   },
   methods: {
+    async addToCart() {
+      if(localStorage.getItem('id')){
+        const products = await carts( this.user._id, {product: this.product});
+        this.$swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Item has been added to cart!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      } else {
+        this.$swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'You need to be logged in to add this item to cart!',
+          footer: '<a href="/login">http://www.express.com/login</a>'
+        })
+      }
+
+    },
     setLoaded: function() {
       this.loaded = true;
       window.paypal

@@ -13,6 +13,7 @@ import ForgotPassword from '../views/ForgotPassword.vue'
 import ResetPassword from '../views/ResetPassword.vue'
 import Dashboard from '../views/Dashboard.vue'
 import EditUser from '../views/EditUser.vue'
+import ShoppingCart from '../views/ShoppingCart.vue'
 
 import { getUserById } from '../api/user'
 
@@ -99,9 +100,9 @@ const routes = [
     }
   },
   {
-    path: '/shop',
-    name: 'Shop',
-    component: Shop,
+    path: '/cart',
+    name: 'ShoppingCart',
+    component: ShoppingCart,
   },
   {
     path: '/search',

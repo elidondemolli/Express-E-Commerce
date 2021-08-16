@@ -19,11 +19,8 @@
             <li  class="nav-item">
               <router-link class="nav-link" to="/">Home</router-link>
             </li>
-            <li v-if="user" class="nav-item">
-              <router-link class="nav-link" to="/shop">Shop</router-link>
-            </li>
-            <li v-if="user" class="nav-item">
-              <router-link class="nav-link" to="/search">Shop Search</router-link>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/search">Shop</router-link>
             </li>
             <li v-if="user != undefined && user.role == 'Admin'" class="nav-item">
               <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
@@ -31,10 +28,10 @@
             <li v-if="user != undefined && user.role == 'Admin'" class="nav-item">
               <router-link class="nav-link" to="/add-post">Add Post</router-link>
             </li>
-            <li v-if="user" class="nav-item">
+            <li class="nav-item">
               <router-link class="nav-link" to="/contact">Contact</router-link>
             </li>
-            <li v-if="user" class="nav-item">
+            <li class="nav-item">
               <router-link class="nav-link" to="/about">About</router-link>
             </li>
             <li v-if="user" class="nav-item">
@@ -50,7 +47,7 @@
               <i class="fal fa-search"></i>
             </li>
             <li v-if="user" class="nav-item">
-              <i class="fal fa-shopping-bag"></i>
+              <router-link class="nav-link" to="/cart"><i class="fal fa-shopping-bag"></i></router-link>
             </li>
           </ul>
         </div>
@@ -132,6 +129,7 @@ export default {
     try {
       const res = await getUsers();
     this.$store.dispatch('user', res)
+    
     } catch (error) {
       localStorage.removeItem('token')
       localStorage.removeItem('id')

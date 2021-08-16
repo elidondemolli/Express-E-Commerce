@@ -52,3 +52,20 @@ export const deleteUser = async (id) => {
     const res = await axios.delete(`/api/user/delete/${id}`);
     return res.data
 }
+
+export const carts = async (id, body) => {
+    const res = await axios.put(`/api/user/add/${id}`, body);
+    console.log('cart', res.data);
+    return res.data;
+}
+
+export const getCarts = async (id) => {
+    const res = await axios.get(`/api/user/getCart/${id}`);
+    console.log('cartGet', res.data.cart);
+    return res.data.cart;
+}
+
+export const deleteCarts = async (userId,id) => {
+    const res = await axios.delete(`/api/user/delete/cart/${userId}/${id}`);
+    return res.data
+}
