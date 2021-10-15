@@ -78,9 +78,13 @@ const routes = [
     name: 'Add-post',
     component: AddPost,
     beforeEnter: async (to, from, next) => {
-      const result = await getUserById(localStorage.getItem('id'));
-      if(result.role == 'Admin' && localStorage.getItem('token')){
-        next();
+      if(localStorage.getItem('id')){
+        const result = await getUserById(localStorage.getItem('id'));
+        if(result.role == 'Admin' && localStorage.getItem('token')){
+          next();
+        } else {
+          next("/");
+        }
       } else {
         next("/");
       }
@@ -91,9 +95,13 @@ const routes = [
     name: 'Edit-post',
     component: EditPost,
     beforeEnter: async (to, from, next) => {
-      const result = await getUserById(localStorage.getItem('id'));
-      if(result.role == 'Admin' && localStorage.getItem('token')){
-        next();
+      if(localStorage.getItem('id')){
+        const result = await getUserById(localStorage.getItem('id'));
+        if(result.role == 'Admin' && localStorage.getItem('token')){
+          next();
+        } else {
+          next("/");
+        }
       } else {
         next("/");
       }
@@ -124,9 +132,13 @@ const routes = [
     name: 'Dashboard',
     component: Dashboard,
     beforeEnter: async (to, from, next) => {
-      const result = await getUserById(localStorage.getItem('id'));
-      if(result.role == 'Admin' && localStorage.getItem('token')){
-        next();
+      if(localStorage.getItem('id')){
+        const result = await getUserById(localStorage.getItem('id'));
+        if(result.role == 'Admin' && localStorage.getItem('token')){
+          next();
+        } else {
+          next("/");
+        }
       } else {
         next("/");
       }
@@ -137,9 +149,13 @@ const routes = [
     name: 'EditUser',
     component: EditUser,
     beforeEnter: async (to, from, next) => {
-      const result = await getUserById(localStorage.getItem('id'));
-      if(result.role == 'Admin' && localStorage.getItem('token')){
-        next();
+      if(localStorage.getItem('id')){
+        const result = await getUserById(localStorage.getItem('id'));
+        if(result.role == 'Admin' && localStorage.getItem('token')){
+          next();
+        } else {
+          next("/");
+        }
       } else {
         next("/");
       }
