@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import QR from '../views/QR.vue'
 import AddPost from '../views/AddPost.vue'
 import EditPost from '../views/EditPost.vue'
 import Shop from '../views/Shop.vue'
@@ -24,6 +25,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/discount/:id',
+    name: 'QR',
+    component: QR
   },
   {
     path: '/login',

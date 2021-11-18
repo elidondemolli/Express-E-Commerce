@@ -1,5 +1,17 @@
 import axios from 'axios';
 
+export const getQR_Code = async (id) => {
+    const res = await axios.get(`/api/post/qr/${id}`);
+    console.log('qr', res.data)
+    return res.data;
+}
+
+export const getDiscount = async (id, body) => {
+    const res = await axios.put(`/api/post/discount/${id}`, {code: body});
+    console.log('discount', res.data)
+    return res.data;
+}
+
 export const searchPosts = async (title) => {
     const res = await axios.get(`/api/post/search/${title}`);
     return res.data;

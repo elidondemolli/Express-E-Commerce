@@ -1,5 +1,6 @@
 const Post = require('../models/post');
-const fs = require('fs')
+const fs = require('fs');
+const QR_CODE = require('qrcode');
 
 const getPosts = async (req, res) => {
     try {
@@ -7,6 +8,29 @@ const getPosts = async (req, res) => {
         return res.status(200).json(posts);
     } catch (error) {
         res.status(404).json({ message: error })
+    }
+}
+
+const getQR_Code = async (req, res) => {
+    try {
+        const qr = await QR_CODE.toDataURL(`http://192.168.1.136:8081/discount/${req.params.id}`);
+        console.log('qrqrqrrq', qr);
+        return res.status(200).json(qr);
+    } catch (error) {
+        res.status(404).json({ message: error });
+    }
+}
+
+const getDiscount = async (req, res) => {
+    try {
+        const discount_product = req.params.id;
+        const posts = await Post.updateOne({ _id: discount_product}, { $set: { discount_price: Math.floor(Math.random() * 15), discount_code: req.body.code }}, { upsert: true });
+        if(posts) {
+            return res.status(200).json(posts);
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(404).json({ message: error });
     }
 }
 
@@ -83,4 +107,4 @@ const searchPosts = async (req, res) => {
     }
 }
 
-module.exports = { getPosts, getPostByID, createPost, updatePost, deletePost, searchPosts }
+module.exports = { getPosts, getPostByID, createPost, updatePost, deletePost, searchPosts, getQR_Code, getDiscount }

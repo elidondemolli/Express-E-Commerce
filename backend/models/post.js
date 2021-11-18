@@ -17,6 +17,12 @@ const postSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    discount_price: {
+        type: Number,
+    },
+    discount_code: {
+        type: Number
+    },
     created: {
         type: Date,
         default: Date.now
