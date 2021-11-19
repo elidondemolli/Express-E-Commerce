@@ -6,7 +6,7 @@
                 <div class="text-center"> <small class="text-uppercase flat">DISCOUNT CODE</small> </div>
                 <div class="d-flex justify-content-center px-2">
                     <div class="d-flex flex-row">
-                        <h1 class="mt-0 off">{{ code }}</h1>
+                        <h1 class="mt-0 off">{{ product.discount_code ? product.discount_code : code }}</h1>
                     </div>
                 </div>
                 <div class="line">
@@ -16,12 +16,12 @@
                 <div class="text-right p-1"> <small>*EXPRESS</small> </div>
             </div>
         </div>
-</div>
+  </div>
 </template>
 
 <script>
 import {
-  getDiscount,
+  getDiscount, getPostByID
 } from "../api/posts";
 
 import { mapGetters } from 'vuex';
@@ -30,28 +30,24 @@ export default {
   name: "Home",
   data() {
     return {
+      product: {},
       discount: 0,
       code: 0,
     };
   },
   async created() {
-    this.code = Math.floor(Math.random() * 10000);
-    console.log('rout', this.code);
-    this.discount = await getDiscount(this.$route.params.id, this.code);
-    this.posts = await getPosts();
-    const items = await getPosts();
-    this.featured = items.filter(item => item.rating == 5).splice(this.generateRandomInteger(0, 11), 4);
-    // this.featured = items.filter(item => item.rating == 5).splice(0, 4);
-    this.watches = items.filter(items => items.category == 'Watch').splice(this.generateRandomInteger(0, 3), 4);
-    this.shoe = items.filter(items => items.category == 'Shoe').splice(this.generateRandomInteger(0, 3), 4);
-    this.clothing = items.filter(items => items.category != 'Shoe' && items.category != 'Watch' && items.category != 'Bag').splice(this.generateRandomInteger(0, 3), 4);
+    this.product = await getPostByID(this.$route.params.id);
+    if(!this.product.discount_code || this.product.discount_code === 0) {
+      this.code = this.generateRandomInteger(1000, 9999);
+      this.discount = await getDiscount(this.$route.params.id, this.code);
+    }
   },
   methods: {
     generateRandomInteger(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
   },
   computed: {
     ...mapGetters(["user"])
@@ -93,11 +89,5 @@ body {
     height: 2px;
     width: 100%;
     background-color: #555555 !important;
-}
-
-@media(max-width:571px) {
-  .card {
-    width: 300px;
-  }
 }
 </style>

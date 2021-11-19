@@ -119,15 +119,8 @@ export default {
     const data = await getPosts();
     this.product = await getPostByID(this.$route.params.id);
     // this.posts = data.filter(item => item._id != this.$route.params.id && item.category == this.product.category).splice(0, 4);
-    this.posts = data
-      .filter(
-        (item) =>
-          item._id != this.$route.params.id &&
-          item.category == this.product.category
-      )
-      .splice(this.generateRandomInteger(0, 3), 4);
-      console.log(this.product._id)
-      this.QR_C(this.product._id);
+    this.posts = data.filter( (item) => item._id != this.$route.params.id && item.category == this.product.category).splice(this.generateRandomInteger(0, 3), 4);
+    this.QR_C(this.product._id);
   },
   methods: {
     async QR_C(id) {
@@ -141,7 +134,8 @@ export default {
           position: "center",
           icon: "success",
           title: `Hooray! Scan this QR Code and you will get a discount!`,
-          html: `<img src=${this.qr} style='width:150px;' >`,
+          html: `<img src=${this.qr} style='width:150px;'>
+                 <p>Or Click <a href=${window.location.protocol}//${window.location.host}/discount/${this.$route.params.id}>here</a></p>`,
           showConfirmButton: false,
         });
       }
@@ -219,13 +213,7 @@ export default {
 </script>
 
 <style>
-body
-  > div
-  > div
-  > section.container.sproduct.my-5.pt-5
-  > div
-  > div.col-lg-5.col-md-12.col-12
-  > img {
+body > div > div  > section.container.sproduct.my-5.pt-5 iv > div.col-lg-5.col-md-12.col-12 > img {
   min-height: 100%;
   min-width: 100%;
   object-fit: cover;

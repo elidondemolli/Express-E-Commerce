@@ -138,19 +138,19 @@
       <div class="mb-3">
         <div class="pt-4">
 
-          <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse" href="#collapseExample"
+          <div>
+            <a class="dark-grey-text d-flex justify-content-between" v-b-toggle="'collapse'" data-toggle="collapse" href="#collapseExample"
             aria-expanded="false" aria-controls="collapseExample">
             Add a discount code (optional)
             <span><i class="fas fa-chevron-down pt-1"></i></span>
           </a>
-
-          <div class="collapse" id="collapseExample">
-            <div class="mt-3">
+            <b-collapse id="collapse">
               <div class="md-form md-outline mb-0">
-                <input type="text" id="discount-code" class="form-control font-weight-light"
+              <input type="text" id="discount-code" class="form-control font-weight-light"
                   placeholder="Enter discount code">
+              <button type="button" @click="price" class="btn btn-secondary btn-block">Submit</button>
               </div>
-            </div>
+            </b-collapse>
           </div>
         </div>
       </div>
@@ -203,8 +203,6 @@ export default {
                   newPrice += item.price * item.quantity;
                   if(newPrice != 0){
                     return this.total = newPrice;
-                  } else {
-                    return this.total = 0;
                   }
               });
               this.$swal.fire(
@@ -215,6 +213,9 @@ export default {
             }
           })
       },
+      price() {
+        this.total -= 30;
+      }
     },
 }
 </script>
