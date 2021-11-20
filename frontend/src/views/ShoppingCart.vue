@@ -114,6 +114,16 @@
               Shipping
               <span>Gratis</span>
             </li>
+            <li v-if="discount_fee > 0" class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+              Discount fee
+              <span>
+                - {{new Intl.NumberFormat("de-DE", {
+                    style: "currency",
+                    currency: "EUR",
+                  }).format(codes.price)
+                }}
+              </span>
+            </li>
             <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
               <div>
                 <strong>The total amount of</strong>
@@ -146,9 +156,12 @@
           </a>
             <b-collapse id="collapse">
               <div class="md-form md-outline mb-0">
-              <input type="text" id="discount-code" class="form-control font-weight-light"
+              <input type="number" v-model="input" id="discount-code" class="form-control font-weight-light"
                   placeholder="Enter discount code">
-              <button type="button" @click="price" class="btn btn-secondary btn-block">Submit</button>
+              <button type="button" @click="discount" class="btn btn-secondary btn-block">Submit</button>
+              <div v-if="this.code_success" class="alert alert-success">Code Applied Successfully!</div>
+              <div v-if="this.code_success == false" class="alert alert-danger">Code does not exist!</div>
+              <div v-if="this.code_expired " class="alert alert-danger">Code has expired!</div>
               </div>
             </b-collapse>
           </div>
@@ -164,58 +177,87 @@
 </template>
 
 <script>
-import { getCarts, deleteCarts } from '../api/user'
+import { getCarts, deleteCarts } from "../api/user";
+import { code, discountToken } from "../api/posts";
 export default {
-    data() {
-        return {
-          cartItems: null,
-          total: 0
-        }
-    },
-    async created() {
+  data() {
+    return {
+      cartItems: null,
+      total: 0,
+      input: 0,
+      codes: {},
+      code_success: null,
+      code_expired: null,
+      discount_fee: 0,
+    };
+  },
+  async created() {
+    try {
+      this.cartItems = await getCarts(localStorage.getItem("id"));
+      this.cartItems.forEach((item) => {
+        return (this.total += item.price * item.quantity);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  methods: {
+    async discount() {
       try {
-        
-        this.cartItems = await getCarts(localStorage.getItem('id'))
-        this.cartItems.forEach(item => {
-            return this.total += item.price * item.quantity;
-        });
-
+        this.codes = await code(this.input);
+        const tokenAvailability = await discountToken(this.codes.discount_token);
+        if (tokenAvailability) {
+          this.discount_fee = this.codes.price;
+          this.price();
+          this.code_success = true;
+          setTimeout(() => {
+            this.code_success = null;
+          }, 3000);
+        }
       } catch (error) {
-        console.log(error);
+        this.discount_fee = 0;
+        if(error.response.data.message == false){
+          this.code_success = false;
+          setTimeout(() => {
+          this.code_success = null;
+          }, 3000);
+        } else {
+          this.code_expired = true;
+          setTimeout(() => {
+          this.code_expired = null;
+          }, 3000);
+        }
       }
     },
-    methods: {
-      async removePost(id) {
-        this.$swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then( async (result) => {
-            if (result.isConfirmed) {
-              let newPrice = 0;
-              await deleteCarts(localStorage.getItem('id'), id);
-              this.cartItems = this.cartItems.filter(item => item._id != id) 
-              this.cartItems.forEach(item => {
-                  newPrice += item.price * item.quantity;
-                  if(newPrice != 0){
-                    return this.total = newPrice;
-                  }
-              });
-              this.$swal.fire(
-                'Deleted!',
-                'Post has been deleted.',
-                'success'
-              )
-            }
-          })
-      },
-      price() {
-        this.total -= 30;
-      }
+    async removePost(id) {
+      this.$swal
+        .fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        })
+        .then(async (result) => {
+          if (result.isConfirmed) {
+            let newPrice = 0;
+            await deleteCarts(localStorage.getItem("id"), id);
+            this.cartItems = this.cartItems.filter((item) => item._id != id);
+            this.cartItems.forEach((item) => {
+              newPrice += item.price * item.quantity;
+              if (newPrice != 0) {
+                return (this.total = newPrice);
+              }
+            });
+            this.$swal.fire("Deleted!", "Post has been deleted.", "success");
+          }
+        });
     },
-}
+    price() {
+      this.total -= this.codes.price;
+    },
+  },
+};
 </script>

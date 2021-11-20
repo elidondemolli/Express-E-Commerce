@@ -21,6 +21,7 @@
 
 <script>
 import {
+  discountToken,
   getDiscount, getPostByID
 } from "../api/posts";
 
@@ -33,14 +34,19 @@ export default {
       product: {},
       discount: 0,
       code: 0,
+      discountToken: {}
     };
   },
   async created() {
-    this.product = await getPostByID(this.$route.params.id);
-    if(!this.product.discount_code || this.product.discount_code === 0) {
-      this.code = this.generateRandomInteger(1000, 9999);
-      this.discount = await getDiscount(this.$route.params.id, this.code);
-    }
+    
+      this.discountToken = await discountToken(this.$route.params.token);
+      this.code = this.discountToken.code;
+      console.log(this.discountToken, 'discountTokennandsakjdnasjkhnkj')
+    // this.product = await getPostByID(this.discountToken.product_id);
+    // if(!this.product.discount_code || this.product.discount_code === 0) {
+    //   this.code = this.generateRandomInteger(1000, 9999);
+    //   this.discount = await getDiscount(this.discountToken.product_id, this.code);
+    // }
   },
   methods: {
     generateRandomInteger(min, max) {

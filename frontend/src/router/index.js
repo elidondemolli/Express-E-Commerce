@@ -27,7 +27,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/discount/:id',
+    path: '/discount/:token',
     name: 'QR',
     component: QR
   },

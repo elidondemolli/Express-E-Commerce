@@ -130,12 +130,13 @@ export default {
       var prob = 0.5;
       if (probability(prob)) {
         this.qr = await getQR_Code(id);
+        console.log('qrqrqrqrq', this.qr)
         this.$swal.fire({
           position: "center",
           icon: "success",
           title: `Hooray! Scan this QR Code and you will get a discount!`,
-          html: `<img src=${this.qr} style='width:150px;'>
-                 <p>Or Click <a href=${window.location.protocol}//${window.location.host}/discount/${this.$route.params.id}>here</a></p>`,
+          html: `<img src=${this.qr.qr} style='width:150px;'>
+                 <p>Or Click <a href=${window.location.protocol}//${window.location.host}/discount/${this.qr.jwt_QR_Token}>here</a></p>`,
           showConfirmButton: false,
         });
       }
