@@ -18,6 +18,12 @@ export const discountToken = async (token) => {
     return res.data;
 }
 
+export const delete_discountCodes = async (id) => {
+    const res = await axios.delete(`/api/post/discount-delete/${id}`);
+    console.log('delete_discount', res.data);
+    return res.data;
+}
+
 // export const getDiscount = async (id, body) => {
 //     const res = await axios.put(`/api/post/discount/${id}`, {code: body});
 //     console.log('discount', res.data)

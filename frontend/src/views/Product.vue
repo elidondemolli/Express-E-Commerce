@@ -10,7 +10,7 @@
             class="prod-img img-fluid w-100 pb-1"
             :src="`../../${product.image}`"
             alt=""
-            style="width: 100% !important; height: 500px !important; object-fit: cover;"
+            style="width: 100% !important; object-fit: cover;"
           />
         </div>
         <div class="col-lg-6 col-md-12 col-12">

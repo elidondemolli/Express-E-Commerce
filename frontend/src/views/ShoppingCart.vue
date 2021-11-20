@@ -140,7 +140,7 @@
             </li>
           </ul>
 
-          <button type="button" class="btn btn-primary btn-block">go to checkout</button>
+          <button type="button" style="background-color: #fb744f; border-color: #fb744f;" class="btn btn-primary btn-block">go to checkout</button>
 
         </div>
       </div>
@@ -156,7 +156,7 @@
           </a>
             <b-collapse id="collapse">
               <div class="md-form md-outline mb-0">
-              <input type="number" v-model="input" id="discount-code" class="form-control font-weight-light"
+              <input type="tel" v-model="input" id="discount-code" class="form-control font-weight-light"
                   placeholder="Enter discount code">
               <button type="button" @click="discount" class="btn btn-secondary btn-block">Submit</button>
               <div v-if="this.code_success" class="alert alert-success">Code Applied Successfully!</div>
@@ -178,13 +178,13 @@
 
 <script>
 import { getCarts, deleteCarts } from "../api/user";
-import { code, discountToken } from "../api/posts";
+import { code, discountToken, delete_discountCodes } from "../api/posts";
 export default {
   data() {
     return {
       cartItems: null,
       total: 0,
-      input: 0,
+      input: null,
       codes: {},
       code_success: null,
       code_expired: null,
@@ -207,12 +207,25 @@ export default {
         this.codes = await code(this.input);
         const tokenAvailability = await discountToken(this.codes.discount_token);
         if (tokenAvailability) {
-          this.discount_fee = this.codes.price;
-          this.price();
-          this.code_success = true;
-          setTimeout(() => {
-            this.code_success = null;
-          }, 3000);
+            this.$swal.fire({
+            title: 'Are you sure?',
+            text: "You can use this discount code only once!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, i want to use it!'
+          }).then( async (result) => {
+            if (result.isConfirmed) {
+              this.discount_fee = this.codes.price;
+              this.price();
+              this.code_success = true;
+              await delete_discountCodes(this.codes._id);
+              setTimeout(() => {
+                this.code_success = null;
+              }, 3000);
+            }
+          })
         }
       } catch (error) {
         this.discount_fee = 0;
@@ -223,6 +236,7 @@ export default {
           }, 3000);
         } else {
           this.code_expired = true;
+          await delete_discountCodes(this.codes._id);
           setTimeout(() => {
           this.code_expired = null;
           }, 3000);
