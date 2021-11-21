@@ -28,7 +28,7 @@ const getQR_Code = async (req, res) => {
     const jwt_QR_Token = jwt.sign(
       { code, price },
       process.env.JWT_QR_CODE_KEY,
-      { expiresIn: "10s" }
+      { expiresIn: "15m" }
     );
 
     const qr = await QR_CODE.toDataURL(
@@ -44,10 +44,8 @@ const getQR_Code = async (req, res) => {
 };
 
 const discountCodes = async (req, res) => {
-  console.log(req.params);
   try {
     const code = await Discount.findOne({ code: req.params.code });
-    console.log(code);
     if (code != null) {
       return res.status(200).json(code);
     } else {

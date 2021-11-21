@@ -12,7 +12,7 @@
                 <div class="line">
                     <hr>
                 </div>
-                <div class="text-center mb-5"> <span class="text-uppercase">Valid till 23 december</span> </div>
+                <div class="text-center mb-5"> <span class="text-uppercase">Valid for 15 minutes</span> </div>
                 <div class="text-right p-1"> <small>*EXPRESS</small> </div>
             </div>
         </div>
@@ -38,7 +38,6 @@ export default {
     };
   },
   async created() {
-    
       this.discountToken = await discountToken(this.$route.params.token);
       this.code = this.discountToken.code;
       console.log(this.discountToken, 'discountTokennandsakjdnasjkhnkj')

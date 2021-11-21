@@ -33,7 +33,9 @@
       <template #table-caption>Products Table.</template>
 
       <template #cell(image)="image">
-        <img class="prod-img img-fluid" style="max-width: 150px;" :src="`../../${image.item.image}`" alt="" />
+        <router-link :to="{ name: 'Product', params:{ id: image.item._id }}">
+          <img class="prod-img img-fluid" style="max-width: 150px;" :src="`../../${image.item.image}`" alt="" />
+        </router-link>
       </template>
 
       <template #cell(content)="content">
@@ -135,7 +137,8 @@ import { mapGetters } from 'vuex'
                 'success'
               )
             }
-          })
+          }
+        )
       }
     },
     computed: {

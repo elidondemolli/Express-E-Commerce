@@ -15,15 +15,9 @@
           <div v-for="item in cartItems" :key="item._id" class="row mb-4">
             <div class="col-md-5 col-lg-3 col-xl-3">
               <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                <img class="img-fluid w-100"
-                  :src="`${item.image}`" alt="Sample">
-                <a href="#!">
-                  <div class="mask">
-                    <img class="img-fluid w-100"
-                      :src="`${item.image}`">
-                    <div class="mask rgba-black-slight"></div>
-                  </div>
-                </a>
+                <router-link :to="{ name: 'Product', params: {id: item.product}}">
+                    <img class="img-fluid w-100" :src="`${item.image}`" alt="Sample">
+                </router-link>
               </div>
             </div>
             <div class="col-md-7 col-lg-9 col-xl-9">
@@ -56,7 +50,7 @@
 
           </div>
 
-          <p class="text-primary mb-0"><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase, adding
+          <p><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase, adding
             items to your cart does not mean booking them.</p>
 
         </div>
@@ -156,12 +150,13 @@
           </a>
             <b-collapse id="collapse">
               <div class="md-form md-outline mb-0">
-              <input type="tel" v-model="input" id="discount-code" class="form-control font-weight-light"
+              <input type="number" v-model="input" id="discount-code" class="form-control font-weight-light"
                   placeholder="Enter discount code">
               <button type="button" @click="discount" class="btn btn-secondary btn-block">Submit</button>
               <div v-if="this.code_success" class="alert alert-success">Code Applied Successfully!</div>
               <div v-if="this.code_success == false" class="alert alert-danger">Code does not exist!</div>
               <div v-if="this.code_expired " class="alert alert-danger">Code has expired!</div>
+              <div v-if="this.input_check" class="alert alert-danger">You have to type in the code!</div>
               </div>
             </b-collapse>
           </div>
@@ -188,6 +183,7 @@ export default {
       codes: {},
       code_success: null,
       code_expired: null,
+      input_check: false,
       discount_fee: 0,
     };
   },
@@ -233,6 +229,11 @@ export default {
           this.code_success = false;
           setTimeout(() => {
           this.code_success = null;
+          }, 3000);
+        } else if(this.input == null) {
+          this.input_check = true;
+          setTimeout(() => {
+            this.input_check = false;
           }, 3000);
         } else {
           this.code_expired = true;
