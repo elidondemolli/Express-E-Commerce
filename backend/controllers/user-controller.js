@@ -238,9 +238,9 @@ const cart = async (req, res) => {
       );
       return res.status(200).json({ message: "products edited" });
     } else {
-        result.cart.unshift(newCart);
-        await result.save();
-        return res.status(200).json({ message: "ADDED" });
+      result.cart.unshift(newCart);
+      await result.save();
+      return res.status(200).json({ message: "ADDED" });
     }
   } catch (error) {
     return res.status(400).json({ message: error });

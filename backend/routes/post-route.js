@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getPosts, getPostByID, createPost, updatePost, deletePost, searchPosts, getQR_Code, discountToken, discountCodes, delete_discountCodes } = require('../controllers/post-controller')
+const { getPosts, getPostByID, createPost, updatePost, deletePost, searchPosts, getQR_Code, discountToken, discountCodes, delete_discountCodes, createOrderedItems, getOrderedItems } = require('../controllers/post-controller')
 const multer = require('multer');
 
 let storage = multer.diskStorage({
@@ -19,6 +19,8 @@ let upload = multer({
 
 router.get('/', getPosts);
 router.post('/', upload, createPost);
+router.post('/order', createOrderedItems);
+router.get('/orderTrack/:orderId', getOrderedItems);
 router.delete('/discount-delete/:id', delete_discountCodes);
 router.post('/qr/:id', getQR_Code);
 router.get('/code/:code', discountCodes);

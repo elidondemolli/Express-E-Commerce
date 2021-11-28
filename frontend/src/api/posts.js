@@ -6,6 +6,18 @@ export const getQR_Code = async (id) => {
     return res.data;
 }
 
+export const getOrderedItems = async (id) => {
+    const res = await axios.get(`/api/post/orderTrack/${id}`);
+    console.log('getOrderedItems', res.data);
+    return res.data;
+}
+
+export const createOrderedItems = async (body) => {
+    const res = await axios.post(`/api/post/order`, body);
+    console.log('createOrderedItems', res.data);
+    return res.data;
+}
+
 export const code = async (code) => {
     const res = await axios.get(`/api/post/code/${code}`);
     console.log('code', res.data)

@@ -10,7 +10,7 @@
 
         <div class="pt-4 wish-list">
 
-          <h5 class="mb-4">Cart (<span>{{cartItems.length}}</span> items)</h5>
+          <h5 class="mb-4">Cart (<span>{{cartItems && cartItems.length}}</span> items)</h5>
 
           <div v-for="item in cartItems" :key="item._id" class="row mb-4">
             <div class="col-md-5 col-lg-3 col-xl-3">
@@ -134,7 +134,7 @@
             </li>
           </ul>
 
-          <button type="button" style="background-color: #fb744f; border-color: #fb744f;" class="btn btn-primary btn-block">go to checkout</button>
+          <div ref="paypals"></div>
 
         </div>
       </div>
@@ -172,8 +172,8 @@
 </template>
 
 <script>
-import { getCarts, deleteCarts } from "../api/user";
-import { code, discountToken, delete_discountCodes } from "../api/posts";
+import { getCarts, deleteCarts, getUsers } from "../api/user";
+import { code, discountToken, delete_discountCodes, createOrderedItems } from "../api/posts";
 export default {
   data() {
     return {
@@ -185,7 +185,15 @@ export default {
       code_expired: null,
       input_check: false,
       discount_fee: 0,
+      loaded: false,
     };
+  },
+  mounted: function() {
+    const script = document.createElement("script");
+    script.src =
+      "https://www.paypal.com/sdk/js?client-id=AbW4zqlEW0FoHX2rfjYDuUY6EVzoCUqntd7q9mhyvaAmKztE4hpGDwZ-VnUx_Sn5JAjCYibpo-GMXNDa&currency=EUR";
+    script.addEventListener("load", this.setLoaded);
+    document.body.appendChild(script);
   },
   async created() {
     try {
@@ -198,6 +206,48 @@ export default {
     }
   },
   methods: {
+    setLoaded: function() {
+      this.loaded = true;
+      window.paypal
+        .Buttons({
+          style: {
+            color: 'black',
+            label: 'pay',
+            tagline: false,
+          },
+          createOrder: (data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  description: 'EXPRESS E-COMMERCE PAY',
+                  amount: {
+                    value: (this.total * 1.02).toFixed(2),
+                  },
+                },
+              ],
+            });
+          },
+          onApprove: async (data, actions) => {
+            const order = await actions.order.capture();
+            console.log('ORDERS', order);
+            const user = await getUsers();
+            const orderApproved = {
+              buyerId: user._id,
+              orderId: order.id,
+              carrierStatus: 1,
+              items: this.cartItems,
+            }
+            const sendOrderedItems = await createOrderedItems(orderApproved);
+            console.log('send', sendOrderedItems);
+            console.log('orderApproved', orderApproved);
+            this.$router.push(`/OrderTrack/${sendOrderedItems.orderId}`); 
+          },
+          onError: (err) => {
+            console.log(err);
+          },
+        })
+        .render(this.$refs.paypals);
+    },
     async discount() {
       try {
         this.codes = await code(this.input);

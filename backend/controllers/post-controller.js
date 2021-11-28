@@ -1,8 +1,10 @@
 const Post = require("../models/post");
 const Discount = require("../models/discount");
+const OrderedItems = require("../models/orderdItems")
 const fs = require("fs");
 const QR_CODE = require("qrcode");
 const jwt = require("jsonwebtoken");
+const os = require('os');
 require("dotenv").config();
 
 const getPosts = async (req, res) => {
@@ -13,6 +15,34 @@ const getPosts = async (req, res) => {
     res.status(404).json({ message: error });
   }
 };
+
+const createOrderedItems = async (req, res) => {
+  try {
+    const orderItems = await OrderedItems.create({ orderId: req.body.orderId, buyerId: req.body.buyerId, carrierStatus: req.body.carrierStatus, items: req.body.items});
+    console.log(orderItems, 'createOrderItems');
+    if(orderdItems) {
+      return res.status(201).json(orderItems);
+    } else {
+      return res.status(404).json("Error not saved");
+    }
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+}
+
+const getOrderedItems = async (req, res) => {
+  try {
+    const orderItems = await OrderedItems.findOne({ orderId: req.params.orderId });
+    console.log(orderItems, 'orderItemsGet');
+    if(orderItems) {
+      return res.status(201).json(orderItems);
+    } else {
+      return res.status(404).json("Not found order");
+    }
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
+}
 
 const getQR_Code = async (req, res) => {
   try {
@@ -31,8 +61,10 @@ const getQR_Code = async (req, res) => {
       { expiresIn: "15m" }
     );
 
+    const networkInterfaces = os.networkInterfaces();
+
     const qr = await QR_CODE.toDataURL(
-      `http://192.168.1.136:8080/discount/${jwt_QR_Token}`
+      `http://${networkInterfaces['Ethernet'][1]['address']}:8080/discount/${jwt_QR_Token}`
     );
 
     await Discount.create({ discount_token: jwt_QR_Token, code, price });
@@ -166,5 +198,7 @@ module.exports = {
   getQR_Code,
   discountToken,
   discountCodes,
-  delete_discountCodes
+  delete_discountCodes,
+  getOrderedItems,
+  createOrderedItems
 };
