@@ -69,3 +69,9 @@ export const deleteCarts = async (userId,id) => {
     const res = await axios.delete(`/api/user/delete/cart/${userId}/${id}`);
     return res.data
 }
+
+export const deleteAllCart = async (userId) => {
+    const res = await axios.delete(`/api/user/delete/cart/${userId}`);
+    console.log('deleteAll', res.data);
+    return res.data
+}

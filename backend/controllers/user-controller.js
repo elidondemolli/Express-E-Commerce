@@ -208,6 +208,21 @@ const resetPassword = async (req, res) => {
   }
 };
 
+const cartDeleteAll = async (req, res) => {
+  console.log(req.params, 'delAll')
+  try {
+    const result = await User.updateMany({ _id: req.params.userId }, { $unset: { cart: ""} });
+    if(result) {
+      return res.status(201).json('Cart deleted');
+    } else {
+      return res.status(404).json('Error cant find cart');
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json('Error')
+  }
+}
+
 const cart = async (req, res) => {
   const id = req.params.id;
 
@@ -224,7 +239,6 @@ const cart = async (req, res) => {
     };
 
     let result = await User.findOne({ _id: id });
-
     let productInCart = result.cart.find((item) => {
       if (item.product.equals(newCart.product)) {
         return item;
@@ -243,6 +257,7 @@ const cart = async (req, res) => {
       return res.status(200).json({ message: "ADDED" });
     }
   } catch (error) {
+    console.log(error, 'addcart')
     return res.status(400).json({ message: error });
   }
 };
@@ -288,4 +303,5 @@ module.exports = {
   cart,
   cartUser,
   cartUserdelete,
+  cartDeleteAll,
 };

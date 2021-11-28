@@ -11,7 +11,7 @@
         <div class="pt-4 wish-list">
 
           <h5 class="mb-4">Cart (<span>{{cartItems && cartItems.length}}</span> items)</h5>
-
+          
           <div v-for="item in cartItems" :key="item._id" class="row mb-4">
             <div class="col-md-5 col-lg-3 col-xl-3">
               <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
@@ -172,7 +172,7 @@
 </template>
 
 <script>
-import { getCarts, deleteCarts, getUsers } from "../api/user";
+import { getCarts, deleteCarts, getUsers, deleteAllCart } from "../api/user";
 import { code, discountToken, delete_discountCodes, createOrderedItems } from "../api/posts";
 export default {
   data() {
@@ -238,8 +238,10 @@ export default {
               items: this.cartItems,
             }
             const sendOrderedItems = await createOrderedItems(orderApproved);
+            const deleteCart = await deleteAllCart(user._id);
             console.log('send', sendOrderedItems);
             console.log('orderApproved', orderApproved);
+            console.log('deleteCart', deleteCart);
             this.$router.push(`/OrderTrack/${sendOrderedItems.orderId}`); 
           },
           onError: (err) => {
