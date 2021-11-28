@@ -15,6 +15,7 @@ import ResetPassword from '../views/ResetPassword.vue'
 import Dashboard from '../views/Dashboard.vue'
 import EditUser from '../views/EditUser.vue'
 import ShoppingCart from '../views/ShoppingCart.vue'
+import OrderTrack from '../views/OrderTrack.vue'
 
 import { getUserById } from '../api/user'
 
@@ -117,6 +118,11 @@ const routes = [
     path: '/cart',
     name: 'ShoppingCart',
     component: ShoppingCart,
+  },
+  {
+    path: '/OrderTrack/:orderId',
+    name: 'OrderTrack',
+    component: OrderTrack
   },
   {
     path: '/search',

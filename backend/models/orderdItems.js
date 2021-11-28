@@ -5,7 +5,7 @@ const orderedItems = mongoose.Schema({
         type: String,
         required: true
     },
-    buyerID: {
+    buyerId: {
         type: String,
         required: true
     },

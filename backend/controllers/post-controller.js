@@ -20,12 +20,13 @@ const createOrderedItems = async (req, res) => {
   try {
     const orderItems = await OrderedItems.create({ orderId: req.body.orderId, buyerId: req.body.buyerId, carrierStatus: req.body.carrierStatus, items: req.body.items});
     console.log(orderItems, 'createOrderItems');
-    if(orderdItems) {
+    if(orderItems) {
       return res.status(201).json(orderItems);
     } else {
       return res.status(404).json("Error not saved");
     }
   } catch (error) {
+    console.log(error, 'order')
     res.status(500).json({ message: error });
   }
 }
