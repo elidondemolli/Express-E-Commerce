@@ -12,9 +12,21 @@ export const getOrderedItems = async (id) => {
     return res.data;
 }
 
+export const getAllOrderedItems = async () => {
+    const res = await axios.get(`/api/post/orderedItems`);
+    console.log('AllOrderedItems', res.data);
+    return res.data;
+}
+
 export const createOrderedItems = async (body) => {
     const res = await axios.post(`/api/post/order`, body);
     console.log('createOrderedItems', res.data);
+    return res.data;
+}
+
+export const updateOrderStatus = async (id, body) => {
+    const res = await axios.patch(`/api/post/updateOrderStatus/${id}`, body);
+    console.log('updateOrder', res.data);
     return res.data;
 }
 

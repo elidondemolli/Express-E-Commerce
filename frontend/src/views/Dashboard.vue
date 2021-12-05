@@ -69,6 +69,39 @@
       ></b-pagination>
     </div>
 
+  <b-table :items="orderedItems" :fields="order_fields" caption-top :per-page="perPage" :current-page="OcurrentPage" id="orders-table">
+
+      <template #table-caption>Orders Table.</template>
+
+      <template #cell(orderId)="orderId">
+         <router-link :to="{ name: 'OrderTrack', params: { orderId: orderId.item.orderId }}"><strong>#{{orderId.item.orderId}}</strong></router-link>
+      </template>
+
+      <template #cell(carrierStatus)="carrierStatus">
+        <div v-if="carrierStatus.item.carrierStatus == 1">Order Confirmed</div>
+        <div v-if="carrierStatus.item.carrierStatus == 2">Picked by courier</div>
+        <div v-if="carrierStatus.item.carrierStatus == 3">On the way</div>
+        <div v-if="carrierStatus.item.carrierStatus == 4">Ready for pickup</div>
+      </template>
+
+      <template #cell(update_order)="update_order">
+        <router-link :to="{ name: 'UpdateOrder', params: { id: update_order.item.orderId }}"><input type="submit" class="btn btn-primary" value="Edit" ></router-link>
+      </template>
+
+      <!-- <template v-slot:cell(delete)="data">
+        <input type="submit" value="Delete" class="btn btn-danger" @click="">
+      </template> -->
+
+    </b-table>
+    <div class="overflow-auto">
+      <b-pagination
+        v-model="UcurrentPage"
+        :total-rows="userRows"
+        :per-page="perPage"
+        aria-controls="orders-table">
+      </b-pagination>
+    </div>
+
   </div>
 </template>
 
@@ -76,7 +109,7 @@
 
 <script>
 import { getAllUsers, deleteUser } from '../api/user'
-import { getPosts, deletePost } from '../api/posts'
+import { getPosts, deletePost, getAllOrderedItems } from '../api/posts'
 import { mapGetters } from 'vuex'
 
   export default {
@@ -84,17 +117,20 @@ import { mapGetters } from 'vuex'
       return {
         perPage: 5,
         UcurrentPage: 1,
+        OcurrentPage: 1,
         PcurrentPage: 1,
         users: [],
         user_fields: ['name', 'email', 'role', 'date', 'Edit', 'delete'],
+        order_fields: ['orderId', 'buyerId', 'buyerame', 'carrierStatus', 'update_order', 'delete_order'],
         products_fields: ['image', 'title', 'category', 'content', 'rating', 'price', 'created', 'edit', 'delete'],
-        products: []
-
+        products: [],
+        orderedItems: [],
       }
     },
     async created(){
         this.users = await getAllUsers();
         this.products = await getPosts();
+        this.orderedItems = await getAllOrderedItems();
     },
     methods: {
       async removeUser(id) {

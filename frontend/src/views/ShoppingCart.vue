@@ -233,6 +233,7 @@ export default {
             const user = await getUsers();
             const orderApproved = {
               buyerId: user._id,
+              buyerName: user.name,
               orderId: order.id,
               carrierStatus: 1,
               items: this.cartItems,

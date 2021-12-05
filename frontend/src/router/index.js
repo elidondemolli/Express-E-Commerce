@@ -16,6 +16,7 @@ import Dashboard from '../views/Dashboard.vue'
 import EditUser from '../views/EditUser.vue'
 import ShoppingCart from '../views/ShoppingCart.vue'
 import OrderTrack from '../views/OrderTrack.vue'
+import UpdateOrder from '../views/UpdateOrder.vue'
 
 import { getUserById } from '../api/user'
 
@@ -160,6 +161,23 @@ const routes = [
     path: '/edit-user/:id',
     name: 'EditUser',
     component: EditUser,
+    beforeEnter: async (to, from, next) => {
+      if(localStorage.getItem('id')){
+        const result = await getUserById(localStorage.getItem('id'));
+        if(result.role == 'Admin' && localStorage.getItem('token')){
+          next();
+        } else {
+          next("/");
+        }
+      } else {
+        next("/");
+      }
+    }
+  },
+  {
+    path: '/update-order/:id',
+    name: 'UpdateOrder',
+    component: UpdateOrder,
     beforeEnter: async (to, from, next) => {
       if(localStorage.getItem('id')){
         const result = await getUserById(localStorage.getItem('id'));

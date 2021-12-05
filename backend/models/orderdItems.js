@@ -9,6 +9,10 @@ const orderedItems = mongoose.Schema({
         type: String,
         required: true
     },
+    buyerName: {
+        type: String,
+        required: true,
+    },
     carrierStatus: {
         type: Number,
         required: true
