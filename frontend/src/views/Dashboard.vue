@@ -95,8 +95,8 @@
     </b-table>
     <div class="overflow-auto">
       <b-pagination
-        v-model="UcurrentPage"
-        :total-rows="userRows"
+        v-model="OcurrentPage"
+        :total-rows="orderRows"
         :per-page="perPage"
         aria-controls="orders-table">
       </b-pagination>
@@ -121,7 +121,7 @@ import { mapGetters } from 'vuex'
         PcurrentPage: 1,
         users: [],
         user_fields: ['name', 'email', 'role', 'date', 'Edit', 'delete'],
-        order_fields: ['orderId', 'buyerId', 'buyerame', 'carrierStatus', 'update_order', 'delete_order'],
+        order_fields: ['orderId', 'buyerId', 'buyerName', 'carrierStatus', 'update_order', 'delete_order'],
         products_fields: ['image', 'title', 'category', 'content', 'rating', 'price', 'created', 'edit', 'delete'],
         products: [],
         orderedItems: [],
@@ -184,6 +184,9 @@ import { mapGetters } from 'vuex'
       },
       productRows() {
         return this.products.length
+      },
+      orderRows() {
+        return this.orderedItems.length
       }
     }
   }
