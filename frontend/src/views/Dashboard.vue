@@ -88,9 +88,9 @@
         <router-link :to="{ name: 'UpdateOrder', params: { id: update_order.item.orderId }}"><input type="submit" class="btn btn-primary" value="Edit" ></router-link>
       </template>
 
-      <!-- <template v-slot:cell(delete)="data">
-        <input type="submit" value="Delete" class="btn btn-danger" @click="">
-      </template> -->
+      <template v-slot:cell(delete_order)="delete_order">
+        <input type="submit" value="Delete" class="btn btn-danger" @click="removeOrder(delete_order.item._id)">
+      </template>
 
     </b-table>
     <div class="overflow-auto">
@@ -108,9 +108,10 @@
 
 
 <script>
-import { getAllUsers, deleteUser } from '../api/user'
-import { getPosts, deletePost, getAllOrderedItems } from '../api/posts'
-import { mapGetters } from 'vuex'
+import { getAllUsers, deleteUser } from '../api/user';
+import { getPosts, deletePost } from '../api/posts';
+import { getAllOrderedItems, deleteOrderedItems } from '../api/orders';
+import { mapGetters } from 'vuex';
 
   export default {
     data() {
@@ -170,6 +171,28 @@ import { mapGetters } from 'vuex'
               this.$swal.fire(
                 'Deleted!',
                 'Post has been deleted.',
+                'success'
+              )
+            }
+          }
+        )
+      },
+      async removeOrder(id) {
+        this.$swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then( async (result) => {
+            if (result.isConfirmed) {
+              await deleteOrderedItems(id);
+              this.orderedItems = this.orderedItems.filter(orderedItems => orderedItems._id != id)
+              this.$swal.fire(
+                'Deleted!',
+                'Order has been deleted.',
                 'success'
               )
             }

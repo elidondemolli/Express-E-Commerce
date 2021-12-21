@@ -173,7 +173,8 @@
 
 <script>
 import { getCarts, deleteCarts, getUsers, deleteAllCart } from "../api/user";
-import { code, discountToken, delete_discountCodes, createOrderedItems } from "../api/posts";
+import { code, discountToken, delete_discountCodes } from "../api/qrCode";
+import { createOrderedItems } from '../api/orders';
 export default {
   data() {
     return {

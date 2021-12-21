@@ -12,11 +12,6 @@
         <a href="/search"><button> SHOP NOW</button></a>
       </div>
     </section>
-    <!-- <section id="braind">
-      <div class="row">
-        <img src="../../img/brandLogos/chanel.png" alt="">
-      </div>
-    </section> -->
     <section id="featured" class="my-5">
       <div class="container text-center mt-5 py-5">
         <h3>Our Featured Products</h3>

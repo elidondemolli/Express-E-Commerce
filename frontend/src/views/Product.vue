@@ -93,7 +93,8 @@
 </template>
 
 <script>
-import { getPosts, getPostByID, deletePost, getQR_Code } from "../api/posts";
+import { getPosts, getPostByID, deletePost } from "../api/posts";
+import { getQR_Code } from '../api/qrCode'
 import { carts } from "../api/user";
 import { mapGetters } from "vuex";
 
@@ -118,7 +119,6 @@ export default {
   async created() {
     const data = await getPosts();
     this.product = await getPostByID(this.$route.params.id);
-    // this.posts = data.filter(item => item._id != this.$route.params.id && item.category == this.product.category).splice(0, 4);
     this.posts = data.filter( (item) => item._id != this.$route.params.id && item.category == this.product.category).splice(this.generateRandomInteger(0, 3), 4);
     this.QR_C(this.product._id);
   },
@@ -130,7 +130,6 @@ export default {
       var prob = 0.5;
       if (probability(prob)) {
         this.qr = await getQR_Code(id);
-        console.log('qrqrqrqrq', this.qr)
         this.$swal.fire({
           position: "center",
           icon: "success",
@@ -260,5 +259,4 @@ body > div > div  > section.container.sproduct.my-5.pt-5 iv > div.col-lg-5.col-m
   opacity: 1;
   transition: 0.3 all;
 }
-
 </style>

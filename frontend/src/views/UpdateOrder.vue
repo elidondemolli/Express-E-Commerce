@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { getOrderedItems, updateOrderStatus } from "../api/posts";
+import { getOrderedItems, updateOrderStatus } from "../api/orders";
 export default {
   name: "UpdateOrder",
   data() {

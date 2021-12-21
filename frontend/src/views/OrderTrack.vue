@@ -40,7 +40,7 @@
 <script>
 import {
   getOrderedItems
-} from "../api/posts";
+} from "../api/orders";
  
 import { mapGetters } from 'vuex';
  
