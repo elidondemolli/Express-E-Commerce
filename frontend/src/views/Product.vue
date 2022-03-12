@@ -32,7 +32,7 @@
             ><i class="fas fa-shopping-cart mr-1"></i> Add to cart
           </a>
           <div style="width: 200px" class="my-3" ref="paypal"></div>
-          <router-link
+          <!-- <router-link
             v-if="user != undefined && user.role == 'Admin'"
             :to="{ name: 'Edit-post', params: { id: product._id } }"
             ><input type="submit" class="btn btn-primary" value="Edit"
@@ -43,7 +43,7 @@
             value="DELETE"
             class="btn btn-danger"
             @click="removePost(product._id)"
-          />
+          /> -->
           <h4 class="mt-3 mb-3">Product Details</h4>
           <span>{{ product.content }}</span>
         </div>
