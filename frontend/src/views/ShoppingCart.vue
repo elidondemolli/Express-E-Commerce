@@ -139,7 +139,7 @@
         </div>
       </div>
 
-      <div class="mb-3">
+      <div v-if="cartItems && cartItems.length > 0" class="mb-3">
         <div class="pt-4">
 
           <div>
@@ -150,7 +150,7 @@
           </a>
             <b-collapse id="collapse">
               <div class="md-form md-outline mb-0">
-              <input type="number" v-model="input" id="discount-code" class="form-control font-weight-light"
+              <input  type="number" v-model="input" id="discount-code" class="form-control font-weight-light"
                   placeholder="Enter discount code">
               <button type="button" @click="discount" class="btn btn-secondary btn-block">Submit</button>
               <div v-if="this.code_success" class="alert alert-success">Code Applied Successfully!</div>
@@ -173,8 +173,7 @@
 
 <script>
 import { getCarts, deleteCarts, getUsers, deleteAllCart } from "../api/user";
-import { code, discountToken, delete_discountCodes } from "../api/qrCode";
-import { createOrderedItems } from '../api/orders';
+import { code, discountToken, delete_discountCodes, createOrderedItems } from "../api/posts";
 export default {
   data() {
     return {
